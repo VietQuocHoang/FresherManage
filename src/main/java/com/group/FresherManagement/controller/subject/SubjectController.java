@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.subject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

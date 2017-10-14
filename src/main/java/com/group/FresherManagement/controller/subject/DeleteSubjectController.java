@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.subject;
 
 import com.group.FresherManagement.services.SubjectServices;
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by Minh Tan on 7/19/2017.
  */
-public class HibernateProxyTypeAdapter extends TypeAdapter<HibernateProxy>{
+public class HibernateProxyTypeAdapter extends TypeAdapter<HibernateProxy> {
     public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
         @Override
         @SuppressWarnings("unchecked")

@@ -1,7 +1,6 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.course;
 
 import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Courses_Subject;
 import com.group.FresherManagement.entities.Subject;
 import com.group.FresherManagement.services.CoursesServices;
 
@@ -14,15 +13,15 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "viewCourse", urlPatterns = "/viewCourse")
-public class ViewCourseController extends HttpServlet{
+public class ViewCourseController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         CoursesServices coursesServices = new CoursesServices();
         Courses courses = coursesServices.findCourseById(id);
-        if(courses == null){
+        if (courses == null) {
             resp.sendRedirect("courses");
-        } else{
+        } else {
             List<Subject> notIncludedSubjectList = coursesServices.findSubjectNotIncludedInCourse(courses);
             req.setAttribute("course", courses);
             req.setAttribute("notIncluded", notIncludedSubjectList);

@@ -7,7 +7,6 @@ import com.group.FresherManagement.entities.Courses;
 import com.group.FresherManagement.entities.Courses_Subject;
 import com.group.FresherManagement.entities.Subject;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,39 +21,39 @@ public class CoursesServices {
         subjectDAO = new SubjectDAO(Subject.class);
     }
 
-    public List<Courses> findAllCourses(){
+    public List<Courses> findAllCourses() {
         return courseDAO.findAll();
     }
 
-    public void deleteCourses(int id){
+    public void deleteCourses(int id) {
         courseDAO.delete(id);
     }
 
-    public void saveCourse(Courses courses, int state){
-        if(state == 1){
+    public void saveCourse(Courses courses, int state) {
+        if (state == 1) {
             courseDAO.insert(courses);
-        } else if(state == 2){
+        } else if (state == 2) {
             courseDAO.updateCourses(courses);
         } else {
 
         }
     }
 
-    public Courses findCourseById(int id){
+    public Courses findCourseById(int id) {
         return courseDAO.findById(id);
     }
 
-    public void addSubjectToCourse(Courses_Subject courses_subject){
+    public void addSubjectToCourse(Courses_Subject courses_subject) {
         coursesSubjectDAO.insert(courses_subject);
     }
 
     public List<Subject> findSubjectNotIncludedInCourse(Courses courses) {
         List<Courses_Subject> list = courses.getCoursesSubjectList();
-        if(list == null || list.isEmpty()){
+        if (list == null || list.isEmpty()) {
             return subjectDAO.findAll();
-        } else{
+        } else {
             List<Integer> includedSubjectList = new ArrayList();
-            for(Courses_Subject c: list){
+            for (Courses_Subject c : list) {
                 includedSubjectList.add(c.getSubject().getId());
             }
             List<Subject> notIncludedSubjectList = subjectDAO.findByNotSubjectId(includedSubjectList);
@@ -62,7 +61,7 @@ public class CoursesServices {
         }
     }
 
-    public void removeSubjectFromCourses(Courses_Subject coursesSubject){
+    public void removeSubjectFromCourses(Courses_Subject coursesSubject) {
         coursesSubjectDAO.delete(coursesSubject.getId());
     }
 }

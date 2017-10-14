@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.course;
 
 import com.group.FresherManagement.entities.Courses;
 import com.group.FresherManagement.entities.Courses_Subject;
@@ -20,7 +20,7 @@ public class CoursesActionController extends HttpServlet {
         String action = req.getParameter("btnAction");
         CoursesServices coursesServices = new CoursesServices();
         int courseId = Integer.parseInt(req.getParameter("txtCourseId"));
-        if(action.equalsIgnoreCase("AddSubject")){
+        if (action.equalsIgnoreCase("AddSubject")) {
             int subjectId = Integer.parseInt(req.getParameter("txtSubjectId"));
             Courses_Subject coursesSubject = new Courses_Subject();
             Courses courses = new Courses();
@@ -30,7 +30,7 @@ public class CoursesActionController extends HttpServlet {
             coursesSubject.setCourses(courses);
             coursesSubject.setSubject(subject);
             coursesServices.addSubjectToCourse(coursesSubject);
-        } else if(action.equalsIgnoreCase("RemoveSubject")){
+        } else if (action.equalsIgnoreCase("RemoveSubject")) {
             int id = Integer.parseInt(req.getParameter("txtId"));
             Courses_Subject coursesSubject = new Courses_Subject();
             coursesSubject.setId(id);

@@ -31,7 +31,7 @@ public class SubjectDAO extends GenericDAO<Subject> {
                     .setParameter("ids", includedSubjectList)
                     .getResultList();
             entityManager.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         } finally {
             entityManager.close();

@@ -11,7 +11,7 @@ public class CourseDAO extends GenericDAO<Courses> {
         super(coursesClass);
     }
 
-    public void updateCourses(Courses courses){
+    public void updateCourses(Courses courses) {
         Courses curr = findById(courses.getId());
         EntityManager entityManager = getEntityManager();
         courses.setId(curr.getId());

@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.course;
 
 import com.group.FresherManagement.entities.Courses;
 import com.group.FresherManagement.services.CoursesServices;
@@ -46,13 +46,13 @@ public class SaveCourseController extends HttpServlet {
         courses.setCourseName(courseName);
         courses.setStartDate(startDate);
         courses.setEndDate(endDate);
-        if(state == 2) {//update
+        if (state == 2) {//update
             int id = Integer.parseInt(req.getParameter("txtId"));
             courses.setId(id);
         }
         CoursesServices coursesServices = new CoursesServices();
         coursesServices.saveCourse(courses, state);
-        if(state == 1){
+        if (state == 1) {
             resp.sendRedirect("courses");
         } else {
             resp.sendRedirect("viewCourse?id=" + courses.getId());

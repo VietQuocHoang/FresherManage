@@ -49,7 +49,7 @@ public class GenericDAO<T extends Object> {
             entityManager.flush();
             entityManager.getTransaction().commit();
             entityManager.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

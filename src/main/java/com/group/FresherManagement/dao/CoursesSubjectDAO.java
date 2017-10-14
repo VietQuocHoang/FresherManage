@@ -30,14 +30,14 @@ public class CoursesSubjectDAO extends GenericDAO<Courses_Subject> {
         return list;
     }
 
-    public List<Courses_Subject> findByCourseId(Courses courses){
+    public List<Courses_Subject> findByCourseId(Courses courses) {
         EntityManager entityManager = getEntityManager();
         List<Courses_Subject> list = new ArrayList<Courses_Subject>();
-        try{
+        try {
             entityManager.getTransaction().begin();
             entityManager.createQuery("from Courses_Subject c where c.courses = :course").setParameter("course", courses).getResultList();
             entityManager.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         } finally {
             entityManager.close();

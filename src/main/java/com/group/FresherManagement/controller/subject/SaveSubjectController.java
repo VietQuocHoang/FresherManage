@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.subject;
 
 import com.group.FresherManagement.entities.Subject;
 import com.group.FresherManagement.services.SubjectServices;
@@ -38,7 +38,7 @@ public class SaveSubjectController extends HttpServlet {
         }
         SubjectServices subjectServices = new SubjectServices();
         subjectServices.saveSubject(subject, state);
-        if(state == 1){
+        if (state == 1) {
             resp.sendRedirect("subjects");
         } else {
             resp.sendRedirect("viewSubject?id=" + subject.getId());

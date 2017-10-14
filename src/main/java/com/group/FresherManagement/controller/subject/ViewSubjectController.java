@@ -1,4 +1,4 @@
-package com.group.FresherManagement.controller;
+package com.group.FresherManagement.controller.subject;
 
 import com.group.FresherManagement.entities.Courses_Subject;
 import com.group.FresherManagement.entities.Subject;
