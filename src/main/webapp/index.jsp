@@ -28,7 +28,8 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> </span>
                             </div>
                             <div class="form-group input-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input class="form-control" placeholder="Password" name="password" type="password"
+                                       value="">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i> </span>
                             </div>
                             <div class="checkbox">
@@ -44,5 +45,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
