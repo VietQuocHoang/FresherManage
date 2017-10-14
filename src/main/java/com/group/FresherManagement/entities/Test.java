@@ -2,8 +2,6 @@ package com.group.FresherManagement.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -11,7 +9,7 @@ public class Test implements Serializable {
     private int id;
     private String name;
     private String questions;
-    private Course_Subject courseSubject;
+    private Courses_Subject coursesSubject;
 
     public Test() {
     }
@@ -23,9 +21,17 @@ public class Test implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Column(name = "name")
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Column(name = "question")
@@ -33,27 +39,17 @@ public class Test implements Serializable {
         return questions;
     }
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    public Course_Subject getCourseSubject() {
-        return courseSubject;
-    }
-
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setQuestions(String questions) {
         this.questions = questions;
     }
 
-    public void setCourseSubject(Course_Subject courseSubject) {
-        this.courseSubject = courseSubject;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
+    public Courses_Subject getCoursesSubject() {
+        return coursesSubject;
+    }
+
+    public void setCoursesSubject(Courses_Subject coursesSubject) {
+        this.coursesSubject = coursesSubject;
     }
 }

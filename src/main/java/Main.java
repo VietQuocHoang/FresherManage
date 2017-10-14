@@ -1,10 +1,11 @@
-import com.group.FresherManagement.utils.EMConfigs;
-
-import javax.persistence.EntityManager;
+import com.group.FresherManagement.dao.CourseDAO;
+import com.group.FresherManagement.entities.Courses;
 
 public class Main {
-    public static void main(String[] args){
-        EntityManager entityManager = EMConfigs.createEntityManager();
+
+    public static void main(String[] args) {
+        CourseDAO courseDAO = new CourseDAO(Courses.class);
+        courseDAO.findAll();
         return;
     }
 }

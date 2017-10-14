@@ -10,6 +10,7 @@ public class Subject implements Serializable {
     private String name;
     private String acronym;
     private String description;
+    private boolean available;
 
     public Subject() {
     }
@@ -21,29 +22,43 @@ public class Subject implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Column(name = "name")
     public String getName() {
         return name;
-    }
-
-    @Column(name = "acronym")
-    public String getAcronym() {
-        return acronym;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    @Column(name = "acronym", unique = true)
+    public String getAcronym() {
+        return acronym;
+    }
+
     public void setAcronym(String acronym) {
         this.acronym = acronym;
     }
 
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "available")
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }
