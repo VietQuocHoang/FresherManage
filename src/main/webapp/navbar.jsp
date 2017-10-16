@@ -41,7 +41,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="courses"><i class="fa fa-calendar fa-fw"></i> Courses</a>
