@@ -41,7 +41,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="courses"><i class="fa fa-calendar fa-fw"></i> Courses</a>
@@ -111,7 +111,7 @@
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse in">
                         <li>
-                            <a class="active" href="blank.html">Blank Page</a>
+                            <a href="blank.html">Blank Page</a>
                         </li>
                         <li>
                             <a href="login.html">Login Page</a>

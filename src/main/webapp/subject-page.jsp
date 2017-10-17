@@ -63,7 +63,7 @@
                         $(document).ready(function () {
                             var table = $("#subject-table").DataTable({
                                 ajax: {
-                                    url: "/api/subjects",
+                                    url: "api/subjects",
                                     dataSrc: ""
                                 },
                                 saveState:true,
