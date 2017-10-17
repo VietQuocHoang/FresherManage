@@ -76,7 +76,7 @@
                                     {data: "acronym"},
                                     {data: "name"},
                                     {
-                                        data: "isAvailable",
+                                        data: "available",
                                         render: function (data, type, row) {
                                             if (data) {
                                                 return "<p class='text-success'>Available</p>";

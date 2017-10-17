@@ -10,12 +10,14 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/*")
 public class CookieFilter implements Filter {
-//    TODO add cookie name here
+    //    TODO add cookie name here
     private final String USER_COOKIE_NAME = "";
 
+    // TODO add Login path to excluded
     private final String[] EXCLUDED_PATH = {
             "/resources"
-            , "/Dashboard"};// TODO for testing purpose only, remove when done
+    };// TODO for testing purpose only, remove when done
+
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
@@ -25,13 +27,13 @@ public class CookieFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) servletResponse;
         String path = req.getRequestURI().substring(req.getContextPath().length());
         boolean isExcludedPath = false;
-        for(String s: EXCLUDED_PATH){
-            if(path.contains(s)){
+        for (String s : EXCLUDED_PATH) {
+            if (path.contains(s)) {
                 isExcludedPath = true;
                 break;
             }
         }
-        if(!isExcludedPath) {
+        if (!isExcludedPath) {
             boolean isLoggedIn = false;
             if (cookies != null) {
                 for (Cookie cookie : cookies) {

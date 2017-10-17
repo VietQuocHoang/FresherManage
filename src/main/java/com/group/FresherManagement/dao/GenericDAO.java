@@ -59,7 +59,7 @@ public class GenericDAO<T extends Object> {
         return entityManager.find(tClass, id);
     }
 
-    public long count(){
+    public long count() {
         EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         long result = entityManager.createQuery("SELECT COUNT(*) FROM " + tClass.getSimpleName(), Long.class).getSingleResult();

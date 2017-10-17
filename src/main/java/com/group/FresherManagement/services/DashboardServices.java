@@ -5,8 +5,6 @@ import com.group.FresherManagement.dao.SubjectDAO;
 import com.group.FresherManagement.entities.Courses;
 import com.group.FresherManagement.entities.Subject;
 
-import java.util.List;
-
 public class DashboardServices {
     private CourseDAO courseDAO;
     private SubjectDAO subjectDAO;
@@ -18,11 +16,11 @@ public class DashboardServices {
         subjectDAO = new SubjectDAO(Subject.class);
     }
 
-    public long getNumOfCourses(){
+    public long getNumOfCourses() {
         return courseDAO.count();
     }
 
-    public long getNumOfSubject(){
+    public long getNumOfSubject() {
         return subjectDAO.count();
     }
 }
