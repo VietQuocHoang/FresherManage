@@ -63,7 +63,7 @@
                         $(document).ready(function () {
                             var table = $("#subject-table").DataTable({
                                 ajax: {
-                                    url: "/api/subjects",
+                                    url: "api/subjects",
                                     dataSrc: ""
                                 },
                                 saveState:true,
@@ -76,7 +76,7 @@
                                     {data: "acronym"},
                                     {data: "name"},
                                     {
-                                        data: "available",
+                                        data: "isAvailable",
                                         render: function (data, type, row) {
                                             if (data) {
                                                 return "<p class='text-success'>Available</p>";
