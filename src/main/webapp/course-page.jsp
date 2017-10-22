@@ -18,7 +18,10 @@
     <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/>"></script>
     <style>
-        .ui-datepicker { position: relative; z-index: 10000 !important; }
+        .ui-datepicker {
+            position: relative;
+            z-index: 10000 !important;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +30,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Subject List</h1>
+                <h1 class="page-header">Courses</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -56,28 +59,28 @@
                         function setDeleteCourseId(id) {
                             $("#delete-course-id").val(id);
                         }
-                        function format(d){
+
+                        function format(d) {
                             return "<table class='pull-right'>" +
                                 "<tr>" +
                                 "<td>" +
-                                "<button type='button' class='btn btn-danger' onclick='setDeleteCourseId(" + d["id"] +")' data-toggle='modal' data-target='#delete-course'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
-                                "<a class='btn btn-warning' href='viewCourse?id="+ d["id"] +"'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
+                                "<button type='button' class='btn btn-danger' onclick='setDeleteCourseId(" + d["id"] + ")' data-toggle='modal' data-target='#delete-course'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
+                                "<a class='btn btn-warning' href='viewCourse?id=" + d["id"] + "'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
                                 "</td>" +
                                 "</tr>" +
                                 "</table>"
                         }
+
                         $(document).ready(function () {
                             var table = $("#courses-table").DataTable({
                                 ajax: {
                                     url: "api/courses",
                                     dataSrc: ""
                                 },
-                                saveState: true,
-                                responsive: true,
                                 columns: [
                                     {
                                         data: "id",
-                                        visible: false
+                                        "visible": false
                                     },
                                     {data: "courseName"},
                                     {data: "startDate"},
@@ -102,9 +105,9 @@
                             });
                             $('#courses-table tbody').on('click', 'td.details-control', function () {
                                 var tr = $(this).closest('tr');
-                                var row = table.row( tr );
+                                var row = table.row(tr);
 
-                                if ( row.child.isShown() ) {
+                                if (row.child.isShown()) {
                                     // This row is already open - close it
                                     row.child.hide();
                                     tr.removeClass('shown');
@@ -114,7 +117,7 @@
                                     row.child(format(row.data())).show();
                                     tr.addClass('shown');
                                 }
-                            } );
+                            });
                         });
                     </script>
                 </div>
