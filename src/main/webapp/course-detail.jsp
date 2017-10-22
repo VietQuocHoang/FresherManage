@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: vieth
@@ -11,8 +12,16 @@
 <head>
     <title>${course.courseName}</title>
     <c:import url="resource-header.jsp"/>
+    <link href="<c:url value="resources/vendor/datatables/css/dataTables.bootstrap.min.css"/>" rel="stylesheet"
+          type="text/css">
+    <link href="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.css"/>">
+    <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>"></script>
+    <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
+    <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/>"></script>
 </head>
 <body>
+<fmt:parseDate pattern="yyyy-MM-dd" value="${course.startDate}" var="parsedStartDate"/>
+<fmt:parseDate pattern="yyyy-MM-dd" value="${course.endDate}" var="parsedEndDate"/>
 <div id="wrapper">
     <c:import url="navbar.jsp"/>
     <div id="page-wrapper">
@@ -42,7 +51,7 @@
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Start Date: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="${course.startDate}" name="txtStartDate" id="txtStartDate">
+                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedStartDate}" pattern="dd/MM/yyyy"/>" name="txtStartDate" id="txtStartDate">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>
@@ -51,7 +60,7 @@
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">End Date: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="${course.endDate}" name="txtEndDate" id="txtEndDate">
+                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedEndDate}" pattern="dd/MM/yyyy"/>" name="txtEndDate" id="txtEndDate">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>
@@ -93,42 +102,54 @@
 
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                        <h3><b>${course.courseName}</b>'s included subjects</h3>
+                        <h3><b>${course.courseName}</b> included theses subjects: </h3>
                         <c:if test="${not empty course.coursesSubjectList}">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Acronym: </th>
-                                    <th>Name: </th>
-                                    <th>Action: </th>
-                                </tr>
-                                <c:forEach items="${course.coursesSubjectList}" var="coursesSubject" varStatus="status">
+                            <table class="table table-bordered" id="table-included-subject">
+                                <thead>
                                     <tr>
-                                        <td>${status.index + 1}</td>
-                                        <td>${coursesSubject.subject.acronym}</td>
-                                        <td>${coursesSubject.subject.name}</td>
-                                        <td>
-                                            <form action="CourseAction" method="post">
-                                                <input type="hidden" value="${coursesSubject.courses.id}" name="txtCourseId">
-                                                <input type="hidden" value="${coursesSubject.id}" name="txtId">
-                                                <button class="btn btn-danger" name="btnAction" value="RemoveSubject">Remove <i class="glyphicon glyphicon-plus"></i> </button>
-                                            </form>
-                                        </td>
+                                        <th>#</th>
+                                        <th>Acronym: </th>
+                                        <th>Name: </th>
+                                        <th>Action: </th>
                                     </tr>
-                                </c:forEach>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${course.coursesSubjectList}" var="coursesSubject" varStatus="status">
+                                        <tr>
+                                            <td>${status.index + 1}</td>
+                                            <td>${coursesSubject.subject.acronym}</td>
+                                            <td>${coursesSubject.subject.name}</td>
+                                            <td>
+                                                <form action="CourseAction" method="post">
+                                                    <input type="hidden" value="${coursesSubject.courses.id}" name="txtCourseId">
+                                                    <input type="hidden" value="${coursesSubject.id}" name="txtId">
+                                                    <button class="btn btn-danger" name="btnAction" value="RemoveSubject">Remove <i class="glyphicon glyphicon-plus"></i> </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
                             </table>
+                            <script>
+                                $(document).ready(function () {
+                                   $("#table-included-subject").DataTable();
+                                });
+                            </script>
                         </c:if>
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                        <h3><b>${course.courseName}</b>'s not included subjects</h3>
+                        <h3>Others's courses: </h3>
                         <c:if test="${not empty notIncluded}">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="table-not-included-subject">
+                                <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Acronym: </th>
                                     <th>Name: </th>
                                     <th>Action: </th>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 <c:forEach var="subject" items="${notIncluded}" varStatus="status">
                                     <tr>
                                         <td>${status.index + 1}</td>
@@ -145,6 +166,12 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                </tbody>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#table-not-included-subject").DataTable();
+                                    });
+                                </script>
                             </table>
                         </c:if>
                     </div>

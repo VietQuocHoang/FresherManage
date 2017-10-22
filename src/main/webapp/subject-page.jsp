@@ -11,6 +11,8 @@
 <head>
     <title>Subject</title>
     <c:import url="resource-header.jsp"/>
+    <link href="<c:url value="resources/vendor/datatables/css/dataTables.bootstrap.min.css"/>" rel="stylesheet"
+          type="text/css">
     <link href="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.css"/>">
     <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
@@ -66,8 +68,6 @@
                                     url: "api/subjects",
                                     dataSrc: ""
                                 },
-                                saveState:true,
-                                responsive: true,
                                 columns: [
                                     {
                                         data: "id",

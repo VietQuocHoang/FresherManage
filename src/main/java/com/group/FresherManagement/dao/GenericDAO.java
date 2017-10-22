@@ -46,7 +46,6 @@ public class GenericDAO<T extends Object> {
             entityManager.getTransaction().begin();
             T o = entityManager.find(tClass, id);
             entityManager.remove(o);
-            entityManager.flush();
             entityManager.getTransaction().commit();
             entityManager.close();
         } catch (Exception e) {
