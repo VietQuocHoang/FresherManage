@@ -17,6 +17,20 @@
     <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/>"></script>
+    <style>
+        .glyphicon-ok{
+            color: #3d8b3d;
+        }
+        .glyphicon-remove{
+            color: #9f191f;
+        }
+        .form-control-active{
+            border-color: #3d8b3d;
+        }
+        .form-control-danger{
+            border-color: #9f191f;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -124,12 +138,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add New Subject</h4>
             </div>
-            <form class="form-horizontal" action="SaveSubject" method="post">
+            <form class="form-horizontal" id="form-add-new" action="SaveSubject" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Acronym: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" name="txtAcronym" class="form-control">
+                            <input type="text" name="txtAcronym" id="txtAcronym" class="form-control">
+                            <i class="glyphicon glyphicon-check-acronym"></i>
                         </div>
                     </div>
                     <div class="form-group">
@@ -158,6 +173,39 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>
+            <script>
+                $(document).ready(function () {
+                    $("#txtAcronym").focusout(function () {
+                        var acronym = $(this).val();
+                        $.ajax({
+                           url: "api/subjects/acronym",
+                           data: {"txtAcronym": acronym},
+                            dataType:"json",
+                            success: function (data) {
+                                var result = JSON.parse(data['result']);
+                                console.log(result);
+                                if(result == "1"){
+                                    $("#txtAcronym").removeClass("form-control-active").addClass("form-control-danger");
+                                    $(".glyphicon-check-acronym").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                                } else {
+                                    $("#txtAcronym").removeClass("form-control-danger").addClass("form-control-active");
+                                    $(".glyphicon-check-acronym").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+                                }
+                            },
+                            error:function(data){
+                               console.log(data);
+                            }
+                       })
+                    });
+                    $("#form-add-new").submit(function (event) {
+                        if($("#txtAcronym").hasClass("form-control-danger")){
+                            $("#txtAcronym").effect("shake");
+                            event.preventDefault();
+                            return false;
+                        }
+                    })
+                })
+            </script>
         </div>
 
     </div>

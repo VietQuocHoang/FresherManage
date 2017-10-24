@@ -17,12 +17,6 @@
     <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/>"></script>
-    <style>
-        .ui-datepicker {
-            position: relative;
-            z-index: 10000 !important;
-        }
-    </style>
 </head>
 <body>
 <div id="wrapper">

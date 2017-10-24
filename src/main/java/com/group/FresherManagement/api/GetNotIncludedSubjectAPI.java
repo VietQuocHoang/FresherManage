@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/api/courses/not-included")
-public class GetNotIncludedSubjectAPI extends HttpServlet{
+public class GetNotIncludedSubjectAPI extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -26,7 +26,7 @@ public class GetNotIncludedSubjectAPI extends HttpServlet{
         processRequest(req, resp);
     }
 
-    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
         try {
@@ -39,7 +39,7 @@ public class GetNotIncludedSubjectAPI extends HttpServlet{
             out.print(jsonObject);
             out.flush();
             out.close();
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             resp.sendRedirect("courses");
         }
     }
