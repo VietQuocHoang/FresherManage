@@ -11,11 +11,12 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*")
 public class CookieFilter implements Filter {
     //    TODO add cookie name here
-    private final String USER_COOKIE_NAME = "";
+    private final String USER_COOKIE_NAME = "username";
 
     // TODO add Login path to excluded
     private final String[] EXCLUDED_PATH = {
-            "/resources"
+            "/resources",
+            "LoginController",
     };// TODO for testing purpose only, remove when done
 
     public void init(FilterConfig filterConfig) throws ServletException {

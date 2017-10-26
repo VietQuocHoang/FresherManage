@@ -25,8 +25,12 @@ public class DashboardController extends HttpServlet {
         DashboardServices dashboardServices = new DashboardServices();
         long numOfCourse = dashboardServices.getNumOfCourses();
         long numOfSubject = dashboardServices.getNumOfSubject();
+        long numOfFresher = dashboardServices.getNumOfFresher();
+        long numOfTest = dashboardServices.getNumOfTest();
         req.setAttribute("numOfSubject", numOfSubject);
         req.setAttribute("numOfCourse", numOfCourse);
+        req.setAttribute("numOfFresher", numOfFresher);
+        req.setAttribute("numOfTest", numOfTest);
         req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
     }
 }

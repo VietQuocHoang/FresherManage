@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <%--TODO add link to fresher page--%>
-                    <a href="#">
+                    <a href="FresherController">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <%--TODO Add href to test page--%>
-                    <a href="#">
+                    <a href="TestController">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
