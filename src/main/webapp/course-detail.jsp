@@ -85,7 +85,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9 col-lg-offset-3 col-md-offset-3 col-xs-offset-3 col-sm-offset-3">
-                            <button type="submit" class="btn btn-success">Save <i class="glyphicon glyphicon-save"></i></button>
+                            <input type="hidden" name="txtId" value="${course.id}"/>
+                            <button type="submit" class="btn btn-success" name="btnAction" value="2">Save <i class="glyphicon glyphicon-save"></i></button>
                         </div>
                     </div>
                 </form>
@@ -177,7 +178,80 @@
                     </div>
                 </div>
                 <div id="tab-fresher" class="tab-pane fade">
-
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <h3><b>${course.courseName}</b> included theses fresher: </h3>
+                        <c:if test="${not empty course.coursesFresherList}">
+                            <table class="table table-bordered" id="table-included-fresher">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name: </th>
+                                    <th>Email: </th>
+                                    <th>Action: </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${course.coursesFresherList}" var="coursesFresher" varStatus="status">
+                                    <tr>
+                                        <td>${status.index + 1}</td>
+                                        <td>${coursesFresher.fresher.firstName} ${coursesFresher.fresher.lastName}</td>
+                                        <td>${coursesFresher.fresher.email}</td>
+                                        <td>
+                                            <form action="CourseAction" method="post">
+                                                <input type="hidden" value="${course.id}" name="txtCourseId">
+                                                <input type="hidden" value="${coursesFresher.id}" name="txtId">
+                                                <button class="btn btn-danger" name="btnAction" value="RemoveFresher">Remove <i class="glyphicon glyphicon-plus"></i> </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            <script>
+                                $(document).ready(function () {
+                                    $("#table-included-fresher").DataTable();
+                                });
+                            </script>
+                        </c:if>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <h3>Others's fresher: </h3>
+                        <c:if test="${not empty notIncluded}">
+                            <table class="table table-bordered" id="table-not-included-fresher">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name: </th>
+                                    <th>Email: </th>
+                                    <th>Action: </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="fresher" items="${notIncludedFresher}" varStatus="status">
+                                    <tr>
+                                        <td>${status.count}</td>
+                                        <td>${fresher.firstName} ${fresher.lastName}</td>
+                                        <td>${fresher.email}</td>
+                                        <td>
+                                            <form method="post" action="CourseAction">
+                                                <input type="hidden" value="${course.id}" name="txtCourseId"/>
+                                                <input type="hidden" value="${fresher.id}" name="txtFresherId">
+                                                <button type="submit" name="btnAction" value="AddFresher" class="btn btn-success">
+                                                    Add This Fresher <i class="glyphicon glyphicon-plus"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#table-not-included-fresher").DataTable();
+                                    });
+                                </script>
+                            </table>
+                        </c:if>
+                    </div>
                 </div>
             </div>
 

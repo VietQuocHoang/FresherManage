@@ -12,14 +12,15 @@ public class CourseDAO extends GenericDAO<Courses> {
     }
 
     public void updateCourses(Courses courses) {
-        Courses curr = findById(courses.getId());
-        EntityManager entityManager = getEntityManager();
-        courses.setId(curr.getId());
-        entityManager.getTransaction().begin();
-        entityManager.merge(courses);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        EntityManager em = getEntityManager();
+        Courses curr = em.find(Courses.class, courses.getId());
+        curr.setAvailable(courses.isAvailable());
+        curr.setCourseName(courses.getCourseName());
+        curr.setCourseDescription(courses.getCourseDescription());
+        curr.setEndDate(courses.getEndDate());
+        curr.setStartDate(courses.getStartDate());
+        em.getTransaction().begin();
+        em.getTransaction().commit();
     }
-
 
 }

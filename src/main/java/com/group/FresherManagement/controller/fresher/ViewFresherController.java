@@ -15,6 +15,7 @@ import java.io.IOException;
 public class ViewFresherController extends HttpServlet {
     private static final String FRESHER_CONTROLLER = "FresherController";
     private static final String FRESHER_DETAIL = "fresher-detail.jsp";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -23,13 +24,13 @@ public class ViewFresherController extends HttpServlet {
         processServlet(request, response);
     }
 
-    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int fresherId = Integer.parseInt(request.getParameter("id"));
         FresherServices fresherServices = new FresherServices();
         Fresher fresher = fresherServices.findById(fresherId);
-        if(fresher == null){
+        if (fresher == null) {
             response.sendRedirect(FRESHER_CONTROLLER);
-        }else{
+        } else {
             request.setAttribute("fresher", fresher);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(FRESHER_DETAIL);
             requestDispatcher.forward(request, response);

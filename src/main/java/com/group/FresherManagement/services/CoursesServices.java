@@ -1,11 +1,7 @@
 package com.group.FresherManagement.services;
 
-import com.group.FresherManagement.dao.CourseDAO;
-import com.group.FresherManagement.dao.CoursesSubjectDAO;
-import com.group.FresherManagement.dao.SubjectDAO;
-import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Courses_Subject;
-import com.group.FresherManagement.entities.Subject;
+import com.group.FresherManagement.dao.*;
+import com.group.FresherManagement.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +10,15 @@ public class CoursesServices {
     private CoursesSubjectDAO coursesSubjectDAO;
     private CourseDAO courseDAO;
     private SubjectDAO subjectDAO;
+    private FresherDAO fresherDAO;
+    private CoursesFresherDAO coursesFresherDAO;
 
     public CoursesServices() {
         coursesSubjectDAO = new CoursesSubjectDAO(Courses_Subject.class);
         courseDAO = new CourseDAO(Courses.class);
         subjectDAO = new SubjectDAO(Subject.class);
+        fresherDAO = new FresherDAO(Fresher.class);
+        coursesFresherDAO = new CoursesFresherDAO(Courses_Fresher.class);
     }
 
     public List<Courses> findAllCourses() {
@@ -47,6 +47,10 @@ public class CoursesServices {
         coursesSubjectDAO.insert(courses_subject);
     }
 
+    public void addFresherToCourse(Courses_Fresher courses_fresher) {
+        coursesFresherDAO.insert(courses_fresher);
+    }
+
     public List<Subject> findSubjectNotIncludedInCourse(Courses courses) {
         List<Courses_Subject> list = courses.getCoursesSubjectList();
         if (list == null || list.isEmpty()) {
@@ -63,5 +67,23 @@ public class CoursesServices {
 
     public void removeSubjectFromCourses(Courses_Subject coursesSubject) {
         coursesSubjectDAO.delete(coursesSubject.getId());
+    }
+
+    public void removeFresherFromCourses(Courses_Fresher courses_fresher) {
+        coursesFresherDAO.delete(courses_fresher.getId());
+    }
+
+    public List<Fresher> findFresherNotIncludedInCourse(Courses courses) {
+        List<Courses_Fresher> list = courses.getCoursesFresherList();
+        if (list == null || list.isEmpty()) {
+            return fresherDAO.findAll();
+        } else {
+            List<Integer> includedFresherList = new ArrayList();
+            for (Courses_Fresher c : list) {
+                includedFresherList.add(c.getFresher().getId());
+            }
+            List<Fresher> notIncludedFresherList = fresherDAO.findByNotFresherId(includedFresherList);
+            return notIncludedFresherList;
+        }
     }
 }

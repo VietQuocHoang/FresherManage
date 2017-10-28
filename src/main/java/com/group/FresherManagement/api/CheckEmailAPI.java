@@ -23,7 +23,7 @@ public class CheckEmailAPI extends HttpServlet {
 
     }
 
-    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         String email = request.getParameter("email");
         FresherServices fresherServices = new FresherServices();
@@ -31,9 +31,9 @@ public class CheckEmailAPI extends HttpServlet {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
         Gson gson = gsonBuilder.create();
-        if(check == true){
+        if (check == true) {
             gson.toJson("1");
-        }else{
+        } else {
             gson.toJson("0");
         }
         PrintWriter out = response.getWriter();

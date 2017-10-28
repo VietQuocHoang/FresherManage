@@ -32,6 +32,11 @@ public class DashboardServices {
         return subjectDAO.count();
     }
 
-    public long getNumOfFresher(){ return fresherDAO.count();}
-    public long getNumOfTest(){ return testDAO.count();}
+    public long getNumOfFresher() {
+        return fresherDAO.count();
+    }
+
+    public long getNumOfTest() {
+        return testDAO.count();
+    }
 }

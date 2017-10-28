@@ -2,8 +2,8 @@ package com.group.FresherManagement.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.dao.FresherDAO;
+import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.utils.HibernateProxyTypeAdapter;
 
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class FresherAPI extends HttpServlet {
         processServlet(request, response);
     }
 
-    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         List list = new FresherDAO(Fresher.class).findAll();
         GsonBuilder gsonBuilder = new GsonBuilder();
