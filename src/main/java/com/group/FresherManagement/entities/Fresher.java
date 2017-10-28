@@ -1,8 +1,12 @@
 package com.group.FresherManagement.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,7 +19,8 @@ public class Fresher implements Serializable {
     private Date dob;
     private String imgUrl;
     private boolean sex;
-
+    private List<Courses_Fresher> coursesFresherList;
+    private List<Test_Fresher> testFresherList;
     public Fresher() {
     }
 
@@ -93,4 +98,23 @@ public class Fresher implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "fresher", orphanRemoval = true)
+    public List<Courses_Fresher> getCoursesFresherList() {
+        return coursesFresherList;
+    }
+
+    public void setCoursesFresherList(List<Courses_Fresher> coursesFresherList) {
+        this.coursesFresherList = coursesFresherList;
+    }
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "fresher", orphanRemoval = true)
+    public List<Test_Fresher> getTestFresherList() {
+        return testFresherList;
+    }
+
+    public void setTestFresherList(List<Test_Fresher> testFresherList) {
+        this.testFresherList = testFresherList;
+    }
 }
