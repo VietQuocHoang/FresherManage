@@ -3,17 +3,16 @@ package com.group.FresherManagement.controller.fresher;
 import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.services.FresherServices;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +42,7 @@ public class SaveFresherController extends HttpServlet {
         int state = Integer.parseInt(request.getParameter("btnAction"));
         Fresher fresher = new Fresher();
         try {
-            if(state == 1)  {
+            if (state == 1) {
                 birthday = new Date(dateFormat.parse(dob).getTime());
             }
             if (state == 2) {

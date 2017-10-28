@@ -30,7 +30,7 @@ public class SaveCourseController extends HttpServlet {
         String courseDescription = req.getParameter("txtCourseDescription");
         String txtStartDate = req.getParameter("txtStartDate");
         String txtEndDate = req.getParameter("txtEndDate");
-        boolean available = req.getParameter("available").equalsIgnoreCase("on");
+        boolean available = req.getParameter("available") != null;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date startDate = null;
         Date endDate = null;

@@ -42,4 +42,8 @@ public class SubjectServices {
     public List<Courses_Subject> getEquivalentCourses(Subject subject) {
         return coursesSubjectDAO.findBySubjectId(subject);
     }
+
+    public boolean checkAcronymExisted(String acronym) {
+        return subjectDAO.findByAcronym(acronym) != null;
+    }
 }

@@ -1,6 +1,5 @@
 package com.group.FresherManagement.controller.fresher;
 
-import com.group.FresherManagement.dao.FresherDAO;
 import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.services.FresherServices;
 
@@ -16,15 +15,16 @@ import java.util.List;
 @WebServlet(name = "FresherController", urlPatterns = "/FresherController")
 public class FresherController extends HttpServlet {
     private static final String FRESHER_PAGE = "fresher-page.jsp";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    processServlet(request, response);
+        processServlet(request, response);
     }
 
-    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FresherServices fresherServices = new FresherServices();
         List<Fresher> listFresher = fresherServices.findAll();
         request.setAttribute("listFresher", listFresher);

@@ -22,7 +22,7 @@ public class UserDAO extends GenericDAO<User> {
             }
         } catch (NoResultException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error at checkLogin in UserDAO", ex);
-        }finally {
+        } finally {
             entityManager.close();
         }
         return check;

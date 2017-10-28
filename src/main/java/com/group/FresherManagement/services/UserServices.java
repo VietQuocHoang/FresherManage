@@ -11,7 +11,7 @@ public class UserServices {
     }
 
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password) {
         return userDAO.checkLogin(username, password);
     }
 }

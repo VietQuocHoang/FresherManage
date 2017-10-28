@@ -21,6 +21,7 @@ public class Fresher implements Serializable {
     private boolean sex;
     private List<Courses_Fresher> coursesFresherList;
     private List<Test_Fresher> testFresherList;
+
     public Fresher() {
     }
 

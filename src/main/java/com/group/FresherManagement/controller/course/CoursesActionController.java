@@ -1,8 +1,6 @@
 package com.group.FresherManagement.controller.course;
 
-import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Courses_Subject;
-import com.group.FresherManagement.entities.Subject;
+import com.group.FresherManagement.entities.*;
 import com.group.FresherManagement.services.CoursesServices;
 
 import javax.servlet.ServletException;
@@ -35,6 +33,22 @@ public class CoursesActionController extends HttpServlet {
             Courses_Subject coursesSubject = new Courses_Subject();
             coursesSubject.setId(id);
             coursesServices.removeSubjectFromCourses(coursesSubject);
+        }
+        if (action.equalsIgnoreCase("AddFresher")) {
+            int fresherId = Integer.parseInt(req.getParameter("txtFresherId"));
+            Courses_Fresher coursesFresher = new Courses_Fresher();
+            Courses courses = new Courses();
+            courses.setId(courseId);
+            Fresher fresher = new Fresher();
+            fresher.setId(fresherId);
+            coursesFresher.setCourses(courses);
+            coursesFresher.setFresher(fresher);
+            coursesServices.addFresherToCourse(coursesFresher);
+        } else if (action.equalsIgnoreCase("RemoveFresher")) {
+            int id = Integer.parseInt(req.getParameter("txtId"));
+            Courses_Fresher courses_fresher = new Courses_Fresher();
+            courses_fresher.setId(id);
+            coursesServices.removeFresherFromCourses(courses_fresher);
         } else {
 
         }

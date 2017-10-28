@@ -38,3 +38,10 @@
 <script src="<c:url value="resources/vendor/jquery-ui/jquery-ui.min.js"/>"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<c:url value="resources/dist/js/sb-admin-2.js"/>"></script>
+
+<style>
+    .ui-datepicker {
+        position: relative;
+        z-index: 10000 !important;
+    }
+</style>

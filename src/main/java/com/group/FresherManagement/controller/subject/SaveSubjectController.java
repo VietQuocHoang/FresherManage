@@ -25,7 +25,7 @@ public class SaveSubjectController extends HttpServlet {
         String name = req.getParameter("txtName");
         String acronym = req.getParameter("txtAcronym");
         String description = req.getParameter("txtDescription");
-        boolean available = req.getParameter("available").equalsIgnoreCase("on");
+        boolean available = req.getParameter("available") != null;
         int state = Integer.parseInt(req.getParameter("btnAction"));
         Subject subject = new Subject();
         subject.setName(name);

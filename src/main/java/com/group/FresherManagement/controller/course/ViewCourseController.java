@@ -1,6 +1,7 @@
 package com.group.FresherManagement.controller.course;
 
 import com.group.FresherManagement.entities.Courses;
+import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.entities.Subject;
 import com.group.FresherManagement.services.CoursesServices;
 
@@ -23,8 +24,11 @@ public class ViewCourseController extends HttpServlet {
             resp.sendRedirect("courses");
         } else {
             List<Subject> notIncludedSubjectList = coursesServices.findSubjectNotIncludedInCourse(courses);
+            List<Fresher> notIncludedFresherList = coursesServices.findFresherNotIncludedInCourse(courses);
             req.setAttribute("course", courses);
             req.setAttribute("notIncluded", notIncludedSubjectList);
+            //TODO
+            req.setAttribute("notIncludedFresher", notIncludedFresherList);
             req.getRequestDispatcher("course-detail.jsp").forward(req, resp);
         }
     }
