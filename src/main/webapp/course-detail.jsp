@@ -124,7 +124,7 @@
                                                 <form action="CourseAction" method="post">
                                                     <input type="hidden" value="${coursesSubject.courses.id}" name="txtCourseId">
                                                     <input type="hidden" value="${coursesSubject.id}" name="txtId">
-                                                    <button class="btn btn-danger" name="btnAction" value="RemoveSubject">Remove <i class="glyphicon glyphicon-plus"></i> </button>
+                                                    <button class="btn btn-danger" name="btnAction" value="RemoveSubject">Remove <i class="glyphicon glyphicon-minus"></i> </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -200,7 +200,7 @@
                                             <form action="CourseAction" method="post">
                                                 <input type="hidden" value="${course.id}" name="txtCourseId">
                                                 <input type="hidden" value="${coursesFresher.id}" name="txtId">
-                                                <button class="btn btn-danger" name="btnAction" value="RemoveFresher">Remove <i class="glyphicon glyphicon-plus"></i> </button>
+                                                <button class="btn btn-danger" name="btnAction" value="RemoveFresher">Remove <i class="glyphicon glyphicon-minus"></i> </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -216,7 +216,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
                         <h3>Others's fresher: </h3>
-                        <c:if test="${not empty notIncluded}">
+                        <c:if test="${not empty notIncludedFresher}">
                             <table class="table table-bordered" id="table-not-included-fresher">
                                 <thead>
                                 <tr>
