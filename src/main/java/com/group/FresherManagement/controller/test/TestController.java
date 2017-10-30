@@ -1,19 +1,44 @@
 package com.group.FresherManagement.controller.test;
 
+import com.group.FresherManagement.entities.Courses;
+import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.Test;
+import com.group.FresherManagement.services.CourseSubjectServices;
+import com.group.FresherManagement.services.CoursesServices;
+import com.group.FresherManagement.services.TestServices;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "TestController", urlPatterns = "/TestController")
 public class TestController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final String TEST_PAGE = "test-page.jsp";
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processServlet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processServlet(request, response);
+    }
 
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        TestServices testServices = new TestServices();
+        CourseSubjectServices courseSubjectServices = new CourseSubjectServices();
+        CoursesServices coursesServices = new CoursesServices();
+        List<Courses_Subject> listCourseSubject = courseSubjectServices.findAll();
+        List<Test> listTest = testServices.findAll();
+        List<Courses> listCourse = coursesServices.findAllCourses();
+        request.setAttribute("listTest", listTest);
+        request.setAttribute("listCourseSubject", listCourseSubject);
+        request.setAttribute("listCourse", listCourse);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(TEST_PAGE);
+        requestDispatcher.forward(request, response);
     }
 }

@@ -1,6 +1,5 @@
-package com.group.FresherManagement.controller.fresher;
+package com.group.FresherManagement.controller.test;
 
-import com.group.FresherManagement.services.FresherServices;
 import com.group.FresherManagement.services.TestServices;
 
 import javax.servlet.ServletException;
@@ -12,9 +11,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "DeleteFresherController", urlPatterns = "/DeleteFresher")
-public class DeleteFresherController extends HttpServlet {
-    private static final String FRESHER_CONTROLLER = "FresherController";
+@WebServlet(name = "DeleteTestController", urlPatterns = "/DeleteTest")
+public class DeleteTestController extends HttpServlet {
+    private static final String TEST_CONTROLLER = "TestController";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -25,15 +24,14 @@ public class DeleteFresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FresherServices fresherServices = new FresherServices();
         TestServices testServices = new TestServices();
         try {
-            int fresherId = Integer.parseInt(request.getParameter("txtId"));
-            testServices.deleteAllTestFresherOfFresher(fresherId);
-            fresherServices.deleteFresher(fresherId);
+            int testId = Integer.parseInt(request.getParameter("txtId"));
+            testServices.deleteAllTestFresherOfTest(testId);
+            testServices.deleteTest(testId);
         } catch (NumberFormatException ex) {
-            Logger.getLogger(DeleteFresherController.class.getName()).log(Level.SEVERE, "Exception at DeleteFresherController");
+            Logger.getLogger(DeleteTestController.class.getName()).log(Level.SEVERE, "Exception at DeleteTestController", ex);
         }
-        response.sendRedirect(FRESHER_CONTROLLER);
+        response.sendRedirect(TEST_CONTROLLER);
     }
 }
