@@ -52,7 +52,8 @@
                     <table id="subject-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th hidden>ID</th>
+                                <th>#</th>
                                 <th>Acronym:</th>
                                 <th>Subject Name:</th>
                                 <th>Available?</th>
@@ -60,6 +61,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:forEach varStatus="status" items="${subjectList}" var="subject">
+                            <tr>
+                                <td hidden>${subject.id}</td>
+                                <td>${status.count}</td>
+                                <td>${subject.acronym}</td>
+                                <td>${subject.name}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${subject.available}">
+                                            <p class="text-success">Available</p>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p class="text-danger">Not Available</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="details-control"><i class="glyphicon glyphicon-collapse-down"></i></td>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <script>
@@ -70,43 +91,14 @@
                             return "<table class='pull-right'>" +
                                 "<tr>" +
                                 "<td>" +
-                                "<button type='button' class='btn btn-danger' onclick='setDeleteSubjectId(" + d["id"] +")' data-toggle='modal' data-target='#delete-subject'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
-                                "<a class='btn btn-warning' href='viewSubject?id="+ d["id"] +"'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
+                                "<button type='button' class='btn btn-danger' onclick='setDeleteSubjectId(" + d[0] +")' data-toggle='modal' data-target='#delete-subject'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
+                                "<a class='btn btn-warning' href='viewSubject?id="+ d[0] +"'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
                                 "</td>" +
                                 "</tr>" +
                                 "</table>"
                         }
                         $(document).ready(function () {
-                            var table = $("#subject-table").DataTable({
-                                ajax: {
-                                    url: "api/subjects",
-                                    dataSrc: ""
-                                },
-                                columns: [
-                                    {
-                                        data: "id",
-                                        "visible": false
-                                    },
-                                    {data: "acronym"},
-                                    {data: "name"},
-                                    {
-                                        data: "available",
-                                        render: function (data, type, row) {
-                                            if (data) {
-                                                return "<p class='text-success'>Available</p>";
-                                            } else {
-                                                return "<p class='text-danger'>Not Available</p>";
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "className": 'details-control',
-                                        "orderable": false,
-                                        "data": null,
-                                        "defaultContent": '<p><i class="glyphicon glyphicon-collapse-down" </p>'
-                                    }
-                                ]
-                            });
+                            var table = $("#subject-table").DataTable();
                             $('#subject-table tbody').on('click', 'td.details-control', function () {
                                 var tr = $(this).closest('tr');
                                 var row = table.row( tr );

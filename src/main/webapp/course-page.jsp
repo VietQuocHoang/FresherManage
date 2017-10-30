@@ -38,7 +38,8 @@
                     <table id="courses-table" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th hidden>Id: </th>
+                            <th>#</th>
                             <th>Course Name:</th>
                             <th>Start Date:</th>
                             <th>End Date:</th>
@@ -47,6 +48,26 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="courses" items="${coursesList}" varStatus="status">
+                            <tr>
+                                <td hidden>${courses.id}</td>
+                                <td>${status.count}</td>
+                                <td>${courses.courseName}</td>
+                                <td>${courses.startDate}</td>
+                                <td>${courses.endDate}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${courses.available}">
+                                            <p class="text-success">Available</p>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p class="text-danger">Not Available</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="details-control"><i class="glyphicon glyphicon-collapse-down"></i></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <script>
@@ -58,45 +79,15 @@
                             return "<table class='pull-right'>" +
                                 "<tr>" +
                                 "<td>" +
-                                "<button type='button' class='btn btn-danger' onclick='setDeleteCourseId(" + d["id"] + ")' data-toggle='modal' data-target='#delete-course'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
-                                "<a class='btn btn-warning' href='viewCourse?id=" + d["id"] + "'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
+                                "<button type='button' class='btn btn-danger' onclick='setDeleteCourseId(" + d[0] + ")' data-toggle='modal' data-target='#delete-course'>Delete <i class='glyphicon glyphicon-trash'></i></button>" +
+                                "<a class='btn btn-warning' href='viewCourse?id=" + d[0] + "'>View Details <i class='glyphicon glyphicon-chevron-right'></i></a>" +
                                 "</td>" +
                                 "</tr>" +
                                 "</table>"
                         }
 
                         $(document).ready(function () {
-                            var table = $("#courses-table").DataTable({
-                                ajax: {
-                                    url: "api/courses",
-                                    dataSrc: ""
-                                },
-                                columns: [
-                                    {
-                                        data: "id",
-                                        "visible": false
-                                    },
-                                    {data: "courseName"},
-                                    {data: "startDate"},
-                                    {data: "endDate"},
-                                    {
-                                        data: "isAvailable",
-                                        render: function (data, type, row) {
-                                            if (data) {
-                                                return "<p class='text-success'>Available</p>";
-                                            } else {
-                                                return "<p class='text-danger'>Not Available</p>";
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "className": 'details-control',
-                                        "orderable": false,
-                                        "data": null,
-                                        "defaultContent": '<p><i class="glyphicon glyphicon-collapse-down" </p>'
-                                    }
-                                ]
-                            });
+                            var table = $("#courses-table").DataTable();
                             $('#courses-table tbody').on('click', 'td.details-control', function () {
                                 var tr = $(this).closest('tr');
                                 var row = table.row(tr);
