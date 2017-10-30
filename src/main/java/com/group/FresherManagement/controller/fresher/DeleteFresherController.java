@@ -1,6 +1,7 @@
 package com.group.FresherManagement.controller.fresher;
 
 import com.group.FresherManagement.services.FresherServices;
+import com.group.FresherManagement.services.TestServices;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +26,11 @@ public class DeleteFresherController extends HttpServlet {
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FresherServices fresherServices = new FresherServices();
+        TestServices testServices = new TestServices();
         try {
             int fresherId = Integer.parseInt(request.getParameter("txtId"));
+            testServices.deleteAllTestFresherOfFresher(fresherId);
             fresherServices.deleteFresher(fresherId);
-
         } catch (NumberFormatException ex) {
             Logger.getLogger(DeleteFresherController.class.getName()).log(Level.SEVERE, "Exception at DeleteFresherController");
         }
