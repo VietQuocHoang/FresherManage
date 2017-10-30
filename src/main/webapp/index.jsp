@@ -15,6 +15,14 @@
 <body>
 <div class="container">
     <div class="row">
+        <c:choose>
+            <c:when test="${check == 1}">
+                <h1 style='color:red;'>Username or Password must not be empty</h1><br/>
+            </c:when>
+            <c:when test="${check == 2}">
+                <h1 style='color:red;'>Username or Password is invalid, try again</h1><br/>
+            </c:when>
+        </c:choose>
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">

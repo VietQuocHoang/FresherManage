@@ -12,6 +12,7 @@ public class CoursesServices {
     private SubjectDAO subjectDAO;
     private FresherDAO fresherDAO;
     private CoursesFresherDAO coursesFresherDAO;
+    private TestFresherDAO testFresherDAO;
 
     public CoursesServices() {
         coursesSubjectDAO = new CoursesSubjectDAO(Courses_Subject.class);
@@ -19,6 +20,7 @@ public class CoursesServices {
         subjectDAO = new SubjectDAO(Subject.class);
         fresherDAO = new FresherDAO(Fresher.class);
         coursesFresherDAO = new CoursesFresherDAO(Courses_Fresher.class);
+        testFresherDAO = new TestFresherDAO(Test_Fresher.class);
     }
 
     public List<Courses> findAllCourses() {

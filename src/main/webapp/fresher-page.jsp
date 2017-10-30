@@ -160,7 +160,7 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Sex: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <label class="radio-inline"><input type="radio" name="rbtSex" value="Male"> Male</label>
+                            <label class="radio-inline"><input type="radio" name="rbtSex" value="Male" selected> Male</label>
                             <label class="radio-inline"><input type="radio" name="rbtSex" value="Female"> Female</label>
                         </div>
                     </div>
