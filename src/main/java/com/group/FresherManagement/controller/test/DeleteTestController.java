@@ -27,6 +27,7 @@ public class DeleteTestController extends HttpServlet {
         TestServices testServices = new TestServices();
         try {
             int testId = Integer.parseInt(request.getParameter("txtId"));
+            testServices.deleteAllTestFresherOfTest(testId);
             testServices.deleteTest(testId);
         } catch (NumberFormatException ex) {
             Logger.getLogger(DeleteTestController.class.getName()).log(Level.SEVERE, "Exception at DeleteTestController", ex);

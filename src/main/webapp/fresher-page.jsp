@@ -11,12 +11,21 @@
 <head>
     <title>Fresher</title>
     <c:import url="resource-header.jsp"/>
-    <link href="<c:url value="resources/vendor/datatables/css/dataTables.bootstrap.min.css" />">
+    <link href="<c:url value="resources/vendor/datatables/css/dataTables.bootstrap.min.css"/>" rel="stylesheet"
+          type="text/css">
     <link href="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.css"/>">
     <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables/js/dataTables.bootstrap.min.js"/>"></script>
     <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/>"></script>
     <style>
+        .ui-datepicker {
+            position: relative;
+            z-index: 10000 !important;
+        }
+
+        .chosen-container .chosen-container-single {
+            width: 100% !important;
+        }
         .ui-datepicker {
             position: relative;
             z-index: 10000 !important;
@@ -121,7 +130,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add New Course</h4>
             </div>
-            <form class="form-horizontal" action="SaveFresher" method="post">
+            <form class="form-horizontal" id="form-add-new-fresher" action="SaveFresher" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">First name: </label>
@@ -138,7 +147,8 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Email: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <input type="email" name="txtEmail" class="form-control formEmail" required>
+                            <input type="text" name="txtEmail" id="txtEmail" class="form-control">
+                            <i class="glyphicon glyphicon-check-email"></i>
                         </div>
                     </div>
                     <div class="form-group">
@@ -160,7 +170,7 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Sex: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <label class="radio-inline"><input type="radio" name="rbtSex" value="Male" selected> Male</label>
+                            <label class="radio-inline"><input type="radio" name="rbtSex" id="rbtMale" value="Male" > Male</label>
                             <label class="radio-inline"><input type="radio" name="rbtSex" value="Female"> Female</label>
                         </div>
                     </div>
@@ -169,31 +179,38 @@
                             $("#txtDob").datepicker({
                                 dateFormat: "dd/mm/yy"
                             });
-                        });
-                        $(document).ready(function () {
-                            $('.formEmail').on('change', function () {
-                                //ajax request
+                            $("#txtEmail").focusout(function () {
+                                var email = $(this).val();
                                 $.ajax({
                                     url: "api/check-email",
-                                    data: {
-                                        'email': $('.formEmail').val()
-                                    },
-                                    dataType: 'json',
+                                    data: {"txtEmail": email},
+                                    dataType:"json",
                                     success: function (data) {
-                                        if (data == "1") {
-                                            alert('Email exists!');
-                                        }
-                                        else {
-                                            alert('Email does not exist!');
+                                        var result = JSON.parse(data['result']);
+                                        console.log(result);
+                                        if(result == "1"){
+                                            $("#txtEmail").removeClass("form-control-active").addClass("form-control-danger");
+                                            $(".glyphicon-check-email").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                                        } else {
+                                            $("#txtEmail").removeClass("form-control-danger").addClass("form-control-active");
+                                            $(".glyphicon-check-email").removeClass("glyphicon-remove").addClass("glyphicon-ok");
                                         }
                                     },
-                                    error: function (data) {
-                                        //error
-                                        alert('Something went wrong, try again!')
+                                    error:function(data){
+                                        console.log(data);
                                     }
-                                });
+                                })
                             });
+                            $("#form-add-new-fresher").submit(function (event) {
+                                if($("#txtEmail").hasClass("form-control-danger")){
+                                    $("#txtEmail").effect("shake");
+                                    event.preventDefault();
+                                    return false;
+                                }
+                            });
+                            document.getElementById("rbtMale").selected = true;
                         });
+
                     </script>
                 </div>
                 <div class="modal-footer">

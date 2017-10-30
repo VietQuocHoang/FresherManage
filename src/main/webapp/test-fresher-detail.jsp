@@ -65,15 +65,16 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Mark: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <input type="number" step="0.1" min="0" max="10" class="form-control" name="txtMark"
-                                   value="<c:choose>
-                                            <c:when test="${test_fresher.mark == 11}">
-                                                0
-                                            </c:when>
-                                            <c:otherwise>
-                                                ${test_fresher.mark}
-                                            </c:otherwise>
-                                            </c:choose>"/>
+                            <c:choose>
+                            <c:when test="${test_fresher.mark == 11}">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control" name="txtMark"
+                                       value="0"/>
+                            </c:when>
+                            <c:otherwise>
+                                <input type="number" step="0.1" min="0" max="10" class="form-control" name="txtMark"
+                                       value="${test_fresher.mark}"/>
+                            </c:otherwise>
+                        </c:choose>
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,7 +86,7 @@
                         </div>
                     </div>
                 </form>
-                <a class='btn btn-warning' href='viewTest?id=${test_fresher.test.id}'>Back to mark another fresher<i
+                <a class='col-md-offset-3 btn btn-warning' href='viewTest?id=${test_fresher.test.id}'>Back to mark another fresher<i
                         class='glyphicon glyphicon-chevron-right'></i></a>
             </div>
         </div>
