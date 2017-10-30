@@ -23,12 +23,17 @@
             z-index: 10000 !important;
         }
 
-        .chosen-container .chosen-container-single {
-            width: 100% !important;
+        .glyphicon-ok{
+            color: #3d8b3d;
         }
-        .ui-datepicker {
-            position: relative;
-            z-index: 10000 !important;
+        .glyphicon-remove{
+            color: #9f191f;
+        }
+        .form-control-active{
+            border-color: #3d8b3d;
+        }
+        .form-control-danger{
+            border-color: #9f191f;
         }
     </style>
 </head>

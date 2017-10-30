@@ -113,19 +113,19 @@ public class TestServices {
         return list;
     }
 
-    public void deleteAllTestFresherOfFresher(int fresherId){
+    public void deleteAllTestFresherOfFresher(int fresherId) {
         List<Test_Fresher> currList = findAllTestFresher();
-        for (Test_Fresher test_fresher: currList) {
-            if(test_fresher.getFresher().getId() == fresherId){
+        for (Test_Fresher test_fresher : currList) {
+            if (test_fresher.getFresher().getId() == fresherId) {
                 deleteTestFresher(test_fresher.getId());
             }
         }
     }
 
-    public void deleteAllTestFresherOfTest(int testId){
+    public void deleteAllTestFresherOfTest(int testId) {
         List<Test_Fresher> list = findAllTestFresher();
-        for (Test_Fresher testFresher:list) {
-            if(testFresher.getTest().getId() == testId){
+        for (Test_Fresher testFresher : list) {
+            if (testFresher.getTest().getId() == testId) {
                 deleteTestFresher(testFresher.getId());
             }
         }
