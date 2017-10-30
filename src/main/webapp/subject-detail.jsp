@@ -29,19 +29,19 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Acronym: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <input type="text" class="form-control" name="txtAcronym" value="${subject.acronym}">
+                            <input type="text" readonly class="form-control" name="txtAcronym" value="${subject.acronym}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Subject Name: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <input type="text" class="form-control" name="txtName" value="${subject.name}">
+                            <input type="text" class="form-control" name="txtName" value="${subject.name}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Subject's Description</label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <textarea class="form-control" name="txtDescription">${subject.description}</textarea>
+                            <textarea class="form-control" name="txtDescription" required>${subject.description}</textarea>
                         </div>
                     </div>
                     <div class="form-group">

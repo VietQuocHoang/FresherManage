@@ -143,20 +143,20 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Acronym: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" name="txtAcronym" id="txtAcronym" class="form-control">
+                            <input type="text" name="txtAcronym" id="txtAcronym" class="form-control" required>
                             <i class="glyphicon glyphicon-check-acronym"></i>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Subject Name: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" name="txtName" class="form-control">
+                            <input type="text" name="txtName" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Description: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <textarea class="form-control" name="txtDescription"></textarea>
+                            <textarea class="form-control" name="txtDescription" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">

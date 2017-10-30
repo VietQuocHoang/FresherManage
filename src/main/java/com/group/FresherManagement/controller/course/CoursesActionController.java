@@ -21,17 +21,14 @@ public class CoursesActionController extends HttpServlet {
         if (action.equalsIgnoreCase("AddSubject")) {
             int subjectId = Integer.parseInt(req.getParameter("txtSubjectId"));
             Courses_Subject coursesSubject = new Courses_Subject();
-            Courses courses = new Courses();
-            courses.setId(courseId);
-            Subject subject = new Subject();
-            subject.setId(subjectId);
+            Courses courses = coursesServices.findCourseById(courseId);
+            Subject subject = coursesServices.findSubjectById(subjectId);
             coursesSubject.setCourses(courses);
             coursesSubject.setSubject(subject);
             coursesServices.addSubjectToCourse(coursesSubject);
         } else if (action.equalsIgnoreCase("RemoveSubject")) {
             int id = Integer.parseInt(req.getParameter("txtId"));
-            Courses_Subject coursesSubject = new Courses_Subject();
-            coursesSubject.setId(id);
+            Courses_Subject coursesSubject = coursesServices.findCourseSubjectById(id);
             coursesServices.removeSubjectFromCourses(coursesSubject);
         }
         if (action.equalsIgnoreCase("AddFresher")) {

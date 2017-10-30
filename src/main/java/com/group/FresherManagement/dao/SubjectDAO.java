@@ -14,11 +14,13 @@ public class SubjectDAO extends GenericDAO<Subject> {
     }
 
     public void update(Subject subject) {
-        Subject curr = findById(subject.getId());
         EntityManager entityManager = getEntityManager();
-        subject.setId(curr.getId());
+        Subject curr = entityManager.find(Subject.class, subject.getId());
+        curr.setDescription(subject.getDescription());
+        curr.setAvailable(subject.isAvailable());
+        curr.setName(subject.getName());
+        curr.setAcronym(subject.getAcronym());
         entityManager.getTransaction().begin();
-        entityManager.merge(subject);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
@@ -28,7 +30,7 @@ public class SubjectDAO extends GenericDAO<Subject> {
         List<Subject> list = new ArrayList<Subject>();
         try {
             entityManager.getTransaction().begin();
-            list = entityManager.createQuery("from Subject s where s.id NOT IN :ids AND s.available = 1")
+            list = entityManager.createQuery("from Subject s where s.id NOT IN :ids")
                     .setParameter("ids", includedSubjectList)
                     .getResultList();
             entityManager.getTransaction().commit();

@@ -35,7 +35,7 @@ public class CoursesServices {
         } else if (state == 2) {
             courseDAO.updateCourses(courses);
         } else {
-
+            return;
         }
     }
 
@@ -85,5 +85,13 @@ public class CoursesServices {
             List<Fresher> notIncludedFresherList = fresherDAO.findByNotFresherId(includedFresherList);
             return notIncludedFresherList;
         }
+    }
+
+    public Subject findSubjectById(int id) {
+        return subjectDAO.findById(id);
+    }
+
+    public Courses_Subject findCourseSubjectById(int id) {
+        return coursesSubjectDAO.findById(id);
     }
 }
