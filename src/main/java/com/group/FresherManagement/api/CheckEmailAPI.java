@@ -1,9 +1,7 @@
 package com.group.FresherManagement.api;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.group.FresherManagement.services.FresherServices;
-import com.group.FresherManagement.utils.HibernateProxyTypeAdapter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,29 +14,23 @@ import java.io.PrintWriter;
 @WebServlet(name = "CheckEmailAPI", urlPatterns = "/api/check-email")
 public class CheckEmailAPI extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        processServlet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        processServlet(request, response);
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
-        String email = request.getParameter("email");
+        PrintWriter out = response.getWriter();
+        String email = request.getParameter("txtEmail");
         FresherServices fresherServices = new FresherServices();
         boolean check = fresherServices.checkFresherRegisterByEmail(email);
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        Gson gson = gsonBuilder.create();
-        if (check == true) {
-            gson.toJson("1");
-        } else {
-            gson.toJson("0");
-        }
-        PrintWriter out = response.getWriter();
-        out.println(gson);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("result", check);
+        out.println(jsonObject.toString());
         out.flush();
-
+        out.close();
     }
 }

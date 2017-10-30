@@ -3,8 +3,11 @@ package com.group.FresherManagement.dao;
 import com.group.FresherManagement.entities.Fresher;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FresherDAO extends GenericDAO<Fresher> {
     public FresherDAO(Class<Fresher> fresherClass) {
@@ -15,11 +18,14 @@ public class FresherDAO extends GenericDAO<Fresher> {
     }
 
     public boolean checkEmail(String email) {
-        List<Fresher> listFresher = new FresherDAO().findAll();
-        for (Fresher fresher : listFresher) {
-            if (email.equals(fresher.getEmail())) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            Fresher fresher = entityManager.createQuery("from Fresher f where f.email=:email", Fresher.class).setParameter("email", email).getSingleResult();
+            if (fresher != null)
                 return true;
-            }
+        } catch (NoResultException ex) {
+            Logger.getLogger(FresherDAO.class.getName()).log(Level.SEVERE, "Exception at checkEmail in FresherDAO", ex);
         }
         return false;
     }
