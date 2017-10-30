@@ -43,8 +43,8 @@ public class GenericDAO<T extends Object> {
     public void delete(int id) {
         try {
             EntityManager entityManager = getEntityManager();
-            entityManager.getTransaction().begin();
             T o = entityManager.find(tClass, id);
+            entityManager.getTransaction().begin();
             entityManager.remove(o);
             entityManager.getTransaction().commit();
             entityManager.close();
@@ -63,7 +63,6 @@ public class GenericDAO<T extends Object> {
         entityManager.getTransaction().begin();
         long result = entityManager.createQuery("SELECT COUNT(*) FROM " + tClass.getSimpleName(), Long.class).getSingleResult();
         entityManager.getTransaction().commit();
-        entityManager.close();
         return result;
     }
 }

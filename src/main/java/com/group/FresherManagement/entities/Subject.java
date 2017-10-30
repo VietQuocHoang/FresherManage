@@ -1,7 +1,11 @@
 package com.group.FresherManagement.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table
@@ -11,6 +15,7 @@ public class Subject implements Serializable {
     private String acronym;
     private String description;
     private boolean available;
+    private List<Courses_Subject> coursesSubjectList;
 
     public Subject() {
     }
@@ -60,5 +65,15 @@ public class Subject implements Serializable {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(orphanRemoval = true, mappedBy = "subject")
+    public List<Courses_Subject> getCoursesSubjectList() {
+        return coursesSubjectList;
+    }
+
+    public void setCoursesSubjectList(List<Courses_Subject> coursesSubjectList) {
+        this.coursesSubjectList = coursesSubjectList;
     }
 }

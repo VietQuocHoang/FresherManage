@@ -3,7 +3,7 @@ package com.group.FresherManagement.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "courses_frehser")
+@Table(name = "courses_fresher")
 public class Courses_Fresher {
     private int id;
     private Fresher fresher;

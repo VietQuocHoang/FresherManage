@@ -38,20 +38,20 @@
                     <div class="form-group">
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Course's Name: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <input type="" class="form-control" value="${course.courseName}" name="txtCourseName">
+                            <input type="" class="form-control" value="${course.courseName}" name="txtCourseName" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Course's Description: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                            <textarea name="txtCourseDescription" class="form-control">${course.courseDescription}</textarea>
+                            <textarea name="txtCourseDescription" class="form-control" required>${course.courseDescription}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Start Date: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedStartDate}" pattern="dd/MM/yyyy"/>" name="txtStartDate" id="txtStartDate">
+                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedStartDate}" pattern="dd/MM/yyyy"/>" name="txtStartDate" id="txtStartDate" required>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <label class="col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">End Date: </label>
                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedEndDate}" pattern="dd/MM/yyyy"/>" name="txtEndDate" id="txtEndDate">
+                                <input type="text" class="form-control" value="<fmt:formatDate value="${parsedEndDate}" pattern="dd/MM/yyyy"/>" name="txtEndDate" id="txtEndDate" required>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>

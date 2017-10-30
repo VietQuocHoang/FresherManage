@@ -135,20 +135,20 @@
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Course name: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <input type="text" name="txtCourseName" class="form-control">
+                            <input type="text" name="txtCourseName" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Course description: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <textarea name="txtCourseDescription" class="form-control"></textarea>
+                            <textarea name="txtCourseDescription" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">Start Date: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="txtStartDate" name="txtStartDate">
+                                <input type="text" class="form-control" id="txtStartDate" name="txtStartDate" required>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-3">End Date: </label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="txtEndDate" name="txtEndDate">
+                                <input type="text" class="form-control" id="txtEndDate" name="txtEndDate" required>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i> </span>
                             </div>
                         </div>
