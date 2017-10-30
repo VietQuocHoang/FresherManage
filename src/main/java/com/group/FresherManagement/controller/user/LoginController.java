@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "LoginController", urlPatterns = "/LoginController")
 public class LoginController extends HttpServlet {
@@ -33,9 +32,12 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("txtPassword");
         RequestDispatcher requestDispatcher;
         UserServices userServices = new UserServices();
-        PrintWriter out = response.getWriter();
+//        PrintWriter out = response.getWriter();
+        int check = 0;
         if ("".equals(username) || "".equals(password)) {
-            out.println("<h1 style='color:red;'>Username or Password must not be empty</h1><br/>");
+//            out.println("<h1 style='color:red;'>Username or Password must not be empty</h1><br/>");
+            check = 1;
+            request.setAttribute("check", check);
             url = LOGIN_PAGE;
             requestDispatcher = request.getRequestDispatcher(url);
             requestDispatcher.forward(request, response);
@@ -47,6 +49,10 @@ public class LoginController extends HttpServlet {
                 response.addCookie(cookie);
                 response.sendRedirect(url);
             } else {
+//                String err = "<h1 style='color:red;'>Username or Password must not be empty</h1><br/>";
+                check = 2;
+                url = LOGIN_PAGE;
+                request.setAttribute("check", check);
                 requestDispatcher = request.getRequestDispatcher(url);
                 requestDispatcher.forward(request, response);
             }
