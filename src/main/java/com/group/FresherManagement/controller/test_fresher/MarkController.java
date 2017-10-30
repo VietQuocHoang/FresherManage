@@ -26,6 +26,7 @@ public class MarkController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         TestServices testServices = new TestServices();
         try {
             int testFresherId = Integer.parseInt(request.getParameter("txtId"));

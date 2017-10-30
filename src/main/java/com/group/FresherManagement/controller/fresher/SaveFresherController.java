@@ -29,6 +29,7 @@ public class SaveFresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         FresherServices fresherServices = new FresherServices();
         String firstName = request.getParameter("txtFirstName");
         String lastName = request.getParameter("txtLastName");

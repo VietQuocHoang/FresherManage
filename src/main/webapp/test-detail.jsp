@@ -73,7 +73,7 @@
                                             <c:forEach var="listSubject" items="${course.coursesSubjectList}">
                                                 <c:set var="subject" value="${listSubject.subject}"/>
                                                 <option name="optCourseSubject"
-                                                        value="${listSubject.id}">${subject.acronym}</option>
+                                                        value="${subject.id}">${subject.acronym}</option>
                                             </c:forEach>
                                         </optgroup>
                                     </c:forEach>
@@ -81,6 +81,7 @@
                                 <script>
                                     $(document).ready(function () {
                                         $("#selectCourseSubject").chosen({width: "100%"});
+                                        $("#selectCourseSubject").val("${testObj.coursesSubject.subject.id}").trigger("chosen:updated");
                                     })
                                 </script>
                             </div>

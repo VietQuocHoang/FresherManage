@@ -82,8 +82,8 @@ public class TestServices {
             test_fresher.setFresher(courseFresher.getFresher());
             if (state == 1) {
                 test_fresher.setMark(11);
+                saveTestFresher(test_fresher, state);
             }
-            saveTestFresher(test_fresher, state);
         }
     }
 
