@@ -15,8 +15,13 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     private static final String ERR_PAGE = "/err.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
-    //TODO THAY CAI LON NAY BANG DASHBOARD
     private static final String DASHBOARD = "Dashboard";
+    private UserServices userServices;
+
+    @Override
+    public void init() throws ServletException {
+        userServices = new UserServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -31,7 +36,6 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
         RequestDispatcher requestDispatcher;
-        UserServices userServices = new UserServices();
 //        PrintWriter out = response.getWriter();
         int check = 0;
         if ("".equals(username) || "".equals(password)) {

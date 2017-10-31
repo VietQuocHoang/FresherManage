@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "courses_fresher")
-public class Courses_Fresher {
+public class CoursesFresher {
     private int id;
     private Fresher fresher;
     private Courses courses;
 
-    public Courses_Fresher() {
+    public CoursesFresher() {
     }
 
     @Id

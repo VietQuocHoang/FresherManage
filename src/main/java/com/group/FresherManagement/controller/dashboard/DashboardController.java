@@ -11,6 +11,13 @@ import java.io.IOException;
 
 @WebServlet(name = "Dashboard", urlPatterns = "/Dashboard")
 public class DashboardController extends HttpServlet {
+    private DashboardServices dashboardServices;
+
+    @Override
+    public void init() throws ServletException {
+        dashboardServices = new DashboardServices();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -22,7 +29,6 @@ public class DashboardController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DashboardServices dashboardServices = new DashboardServices();
         long numOfCourse = dashboardServices.getNumOfCourses();
         long numOfSubject = dashboardServices.getNumOfSubject();
         long numOfFresher = dashboardServices.getNumOfFresher();

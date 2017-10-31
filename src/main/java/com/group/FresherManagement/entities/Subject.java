@@ -15,7 +15,7 @@ public class Subject implements Serializable {
     private String acronym;
     private String description;
     private boolean available;
-    private List<Courses_Subject> coursesSubjectList;
+    private List<CoursesSubject> coursesSubjectList;
 
     public Subject() {
     }
@@ -69,11 +69,11 @@ public class Subject implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(orphanRemoval = true, mappedBy = "subject")
-    public List<Courses_Subject> getCoursesSubjectList() {
+    public List<CoursesSubject> getCoursesSubjectList() {
         return coursesSubjectList;
     }
 
-    public void setCoursesSubjectList(List<Courses_Subject> coursesSubjectList) {
+    public void setCoursesSubjectList(List<CoursesSubject> coursesSubjectList) {
         this.coursesSubjectList = coursesSubjectList;
     }
 }

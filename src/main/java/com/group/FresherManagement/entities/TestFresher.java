@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "test_fresher")
-public class Test_Fresher implements Serializable {
+public class TestFresher implements Serializable {
     private int id;
     private Fresher fresher;
     private float mark;

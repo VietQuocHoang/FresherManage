@@ -13,14 +13,20 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "CourseAction", urlPatterns = "/CourseAction")
 public class CoursesActionController extends HttpServlet {
+    CoursesServices coursesServices;
+
+    @Override
+    public void init() throws ServletException {
+        coursesServices = new CoursesServices();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("btnAction");
-        CoursesServices coursesServices = new CoursesServices();
         int courseId = Integer.parseInt(req.getParameter("txtCourseId"));
         if (action.equalsIgnoreCase("AddSubject")) {
             int subjectId = Integer.parseInt(req.getParameter("txtSubjectId"));
-            Courses_Subject coursesSubject = new Courses_Subject();
+            CoursesSubject coursesSubject = new CoursesSubject();
             Courses courses = coursesServices.findCourseById(courseId);
             Subject subject = coursesServices.findSubjectById(subjectId);
             coursesSubject.setCourses(courses);
@@ -28,12 +34,12 @@ public class CoursesActionController extends HttpServlet {
             coursesServices.addSubjectToCourse(coursesSubject);
         } else if (action.equalsIgnoreCase("RemoveSubject")) {
             int id = Integer.parseInt(req.getParameter("txtId"));
-            Courses_Subject coursesSubject = coursesServices.findCourseSubjectById(id);
+            CoursesSubject coursesSubject = coursesServices.findCourseSubjectById(id);
             coursesServices.removeSubjectFromCourses(coursesSubject);
         }
         if (action.equalsIgnoreCase("AddFresher")) {
             int fresherId = Integer.parseInt(req.getParameter("txtFresherId"));
-            Courses_Fresher coursesFresher = new Courses_Fresher();
+            CoursesFresher coursesFresher = new CoursesFresher();
             Courses courses = new Courses();
             courses.setId(courseId);
             Fresher fresher = new Fresher();
@@ -43,7 +49,7 @@ public class CoursesActionController extends HttpServlet {
             coursesServices.addFresherToCourse(coursesFresher);
         } else if (action.equalsIgnoreCase("RemoveFresher")) {
             int id = Integer.parseInt(req.getParameter("txtId"));
-            Courses_Fresher courses_fresher = new Courses_Fresher();
+            CoursesFresher courses_fresher = new CoursesFresher();
             courses_fresher.setId(id);
             coursesServices.removeFresherFromCourses(courses_fresher);
         } else {

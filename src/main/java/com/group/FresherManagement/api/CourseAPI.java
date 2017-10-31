@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.graph.GraphAdapterBuilder;
 import com.group.FresherManagement.dao.CourseDAO;
 import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Courses_Fresher;
-import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.CoursesFresher;
+import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.utils.HibernateProxyTypeAdapter;
 
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class CourseAPI extends HttpServlet {
         List list = new CourseDAO(Courses.class).findAll();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        new GraphAdapterBuilder().addType(Courses_Subject.class).addType(Courses_Fresher.class).registerOn(gsonBuilder);
+        new GraphAdapterBuilder().addType(CoursesSubject.class).addType(CoursesFresher.class).registerOn(gsonBuilder);
         Gson gson = gsonBuilder.create();
         String jsonObj = gson.toJson(list);
         PrintWriter out = resp.getWriter();

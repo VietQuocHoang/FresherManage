@@ -1,22 +1,22 @@
 package com.group.FresherManagement.dao;
 
-import com.group.FresherManagement.entities.Test_Fresher;
+import com.group.FresherManagement.entities.TestFresher;
 
 import javax.persistence.EntityManager;
 import java.sql.Date;
 
-public class TestFresherDAO extends GenericDAO<Test_Fresher> {
+public class TestFresherDAO extends GenericDAO<TestFresher> {
     public TestFresherDAO() {
     }
 
-    public TestFresherDAO(Class<Test_Fresher> test_fresherClass) {
+    public TestFresherDAO(Class<TestFresher> test_fresherClass) {
         super(test_fresherClass);
     }
 
 
-    public void update(Test_Fresher test_fresher, Date date) {
+    public void update(TestFresher test_fresher, Date date) {
         EntityManager entityManager = getEntityManager();
-        Test_Fresher currTestFresher = entityManager.find(Test_Fresher.class, test_fresher.getId());
+        TestFresher currTestFresher = entityManager.find(TestFresher.class, test_fresher.getId());
         entityManager.getTransaction().begin();
         currTestFresher.setFresher(test_fresher.getFresher());
         currTestFresher.setTest(test_fresher.getTest());

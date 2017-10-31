@@ -3,7 +3,7 @@ package com.group.FresherManagement.controller.test;
 import com.group.FresherManagement.entities.Courses;
 import com.group.FresherManagement.entities.Fresher;
 import com.group.FresherManagement.entities.Test;
-import com.group.FresherManagement.entities.Test_Fresher;
+import com.group.FresherManagement.entities.TestFresher;
 import com.group.FresherManagement.services.CoursesServices;
 import com.group.FresherManagement.services.TestServices;
 
@@ -21,6 +21,14 @@ import java.util.logging.Logger;
 @WebServlet(name = "ViewTestController", urlPatterns = "/viewTest")
 public class ViewTestController extends HttpServlet {
     private static final String TEST_DETAIL = "test-detail.jsp";
+    private TestServices testServices;
+    private CoursesServices coursesServices;
+
+    @Override
+    public void init() throws ServletException {
+        testServices = new TestServices();
+        coursesServices = new CoursesServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -31,8 +39,6 @@ public class ViewTestController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestServices testServices = new TestServices();
-        CoursesServices coursesServices = new CoursesServices();
         String testId = request.getParameter("id");
         try {
             int id = Integer.parseInt(testId);
@@ -40,8 +46,8 @@ public class ViewTestController extends HttpServlet {
             List<Courses> listCourse = coursesServices.findAllCourses();
             Courses courses = test.getCoursesSubject().getCourses();
             List<Fresher> notIncludedFresherList = coursesServices.findFresherNotIncludedInCourse(courses);
-            List<Test_Fresher> listTestFresherNotMark = testServices.findAllTestFresherOfTestNotMark(test);
-            List<Test_Fresher> listTestFresherMarked = testServices.findAllTestFresherOfTestMarked(test);
+            List<TestFresher> listTestFresherNotMark = testServices.findAllTestFresherOfTestNotMark(test);
+            List<TestFresher> listTestFresherMarked = testServices.findAllTestFresherOfTestMarked(test);
             request.setAttribute("testObj", test);
             request.setAttribute("listCourse", listCourse);
 //            request.setAttribute("course", courses);

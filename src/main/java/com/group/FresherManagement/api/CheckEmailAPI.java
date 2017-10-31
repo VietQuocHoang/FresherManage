@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "CheckEmailAPI", urlPatterns = "/api/check-email")
 public class CheckEmailAPI extends HttpServlet {
+    FresherServices fresherServices;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
@@ -21,11 +23,15 @@ public class CheckEmailAPI extends HttpServlet {
         processServlet(request, response);
     }
 
+    @Override
+    public void init() throws ServletException {
+        fresherServices = new FresherServices();
+    }
+
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         String email = request.getParameter("txtEmail");
-        FresherServices fresherServices = new FresherServices();
         boolean check = fresherServices.checkFresherRegisterByEmail(email);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("result", check);

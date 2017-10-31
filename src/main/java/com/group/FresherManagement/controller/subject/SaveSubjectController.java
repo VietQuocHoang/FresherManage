@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "SaveSubject", urlPatterns = "/SaveSubject")
 public class SaveSubjectController extends HttpServlet {
+    private SubjectServices subjectServices;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -36,7 +38,6 @@ public class SaveSubjectController extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("txtId"));
             subject.setId(id);
         }
-        SubjectServices subjectServices = new SubjectServices();
         subjectServices.saveSubject(subject, state);
         if (state == 1) {
             resp.sendRedirect("subjects");

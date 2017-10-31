@@ -25,7 +25,14 @@ public class SaveCourseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        int state = Integer.parseInt(req.getParameter("btnAction"));
+        int state = -1;
+        try {
+            state = Integer.parseInt(req.getParameter("btnAction"));
+        } catch(NumberFormatException e){
+          PrintWriter out = resp.getWriter();
+          out.println("Invalid request");
+          out.close();
+        }
         String courseName = req.getParameter("txtCourseName");
         String courseDescription = req.getParameter("txtCourseDescription");
         String txtStartDate = req.getParameter("txtStartDate");

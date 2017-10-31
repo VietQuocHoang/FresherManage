@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.graph.GraphAdapterBuilder;
 import com.group.FresherManagement.dao.SubjectDAO;
-import com.group.FresherManagement.entities.Courses_Fresher;
-import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.CoursesFresher;
+import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.entities.Subject;
 import com.group.FresherManagement.utils.HibernateProxyTypeAdapter;
 
@@ -35,7 +35,7 @@ public class SubjectAPI extends HttpServlet {
         List<Subject> list = new SubjectDAO(Subject.class).findAll();
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
-        new GraphAdapterBuilder().addType(Courses_Subject.class).addType(Courses_Fresher.class).registerOn(gsonBuilder);
+        new GraphAdapterBuilder().addType(CoursesSubject.class).addType(CoursesFresher.class).registerOn(gsonBuilder);
         Gson gson = gsonBuilder.create();
         String jsonObject = gson.toJson(list);
         PrintWriter out = resp.getWriter();

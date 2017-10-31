@@ -1,6 +1,6 @@
 package com.group.FresherManagement.controller.test_fresher;
 
-import com.group.FresherManagement.entities.Test_Fresher;
+import com.group.FresherManagement.entities.TestFresher;
 import com.group.FresherManagement.services.TestServices;
 
 import javax.servlet.ServletException;
@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class TestFresherController extends HttpServlet {
     private static final String TEST_FRESHER_DETAIL = "test-fresher-detail.jsp";
 
+    private TestServices testServices;
     //    private static final String
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -26,11 +27,10 @@ public class TestFresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestServices testServices = new TestServices();
         try {
             int testFresherId = Integer.parseInt(request.getParameter("txtTestFresherId"));
 //            int state = Integer.parseInt(request.getParameter("btnAction"));
-            Test_Fresher test_fresher = testServices.findTestFresherById(testFresherId);
+            TestFresher test_fresher = testServices.findTestFresherById(testFresherId);
 //            testServices.saveTestFresher(test_fresher, state);
             request.setAttribute("test_fresher", test_fresher);
             request.getRequestDispatcher(TEST_FRESHER_DETAIL).forward(request, response);

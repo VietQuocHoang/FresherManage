@@ -12,10 +12,23 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "DeleteSubject", urlPatterns = "/DeleteSubject")
 public class DeleteSubjectController extends HttpServlet {
+    private SubjectServices subjectServices;
+
+    @Override
+    public void init() throws ServletException {
+        subjectServices = new SubjectServices();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("txtId"));
-        SubjectServices subjectServices = new SubjectServices();
+        int id = -1;
+        try{
+            id = Integer.parseInt(req.getParameter("txtId"));
+        } catch (NumberFormatException e){
+            PrintWriter out = resp.getWriter();
+            out.print("Invalid request");
+            out.close();
+        }
         subjectServices.delete(id);
         resp.sendRedirect("subjects");
     }

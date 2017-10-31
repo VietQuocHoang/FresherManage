@@ -46,7 +46,6 @@
         <div class="row">
             <!-- main content go here -->
             <div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 col-lg-offset-1 col-md-offset-1">
-                <%--//TODO--%>
                 <form class="form-horizontal" action="MarkController" method="post">
                     <div class="form-group">
                         <label class="control-label col-lg-3 col-md-3 col-xs-3 col-sm-3 control-label">Test

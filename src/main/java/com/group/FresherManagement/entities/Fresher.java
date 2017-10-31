@@ -19,8 +19,8 @@ public class Fresher implements Serializable {
     private Date dob;
     private String imgUrl;
     private boolean sex;
-    private List<Courses_Fresher> coursesFresherList;
-    private List<Test_Fresher> testFresherList;
+    private List<CoursesFresher> coursesFresherList;
+    private List<TestFresher> testFresherList;
 
     public Fresher() {
     }
@@ -101,21 +101,21 @@ public class Fresher implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "fresher", orphanRemoval = true)
-    public List<Courses_Fresher> getCoursesFresherList() {
+    public List<CoursesFresher> getCoursesFresherList() {
         return coursesFresherList;
     }
 
-    public void setCoursesFresherList(List<Courses_Fresher> coursesFresherList) {
+    public void setCoursesFresherList(List<CoursesFresher> coursesFresherList) {
         this.coursesFresherList = coursesFresherList;
     }
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "fresher", orphanRemoval = true)
-    public List<Test_Fresher> getTestFresherList() {
+    public List<TestFresher> getTestFresherList() {
         return testFresherList;
     }
 
-    public void setTestFresherList(List<Test_Fresher> testFresherList) {
+    public void setTestFresherList(List<TestFresher> testFresherList) {
         this.testFresherList = testFresherList;
     }
 }

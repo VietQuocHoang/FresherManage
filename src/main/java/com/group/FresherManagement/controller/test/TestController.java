@@ -1,7 +1,7 @@
 package com.group.FresherManagement.controller.test;
 
 import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.entities.Test;
 import com.group.FresherManagement.services.CourseSubjectServices;
 import com.group.FresherManagement.services.CoursesServices;
@@ -20,6 +20,16 @@ import java.util.List;
 public class TestController extends HttpServlet {
     private static final String TEST_PAGE = "test-page.jsp";
 
+    private TestServices testServices;
+    private CourseSubjectServices courseSubjectServices;
+    private CoursesServices coursesServices;
+    @Override
+    public void init() throws ServletException {
+        testServices = new TestServices();
+        courseSubjectServices = new CourseSubjectServices();
+        coursesServices = new CoursesServices();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
@@ -29,10 +39,7 @@ public class TestController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestServices testServices = new TestServices();
-        CourseSubjectServices courseSubjectServices = new CourseSubjectServices();
-        CoursesServices coursesServices = new CoursesServices();
-        List<Courses_Subject> listCourseSubject = courseSubjectServices.findAll();
+        List<CoursesSubject> listCourseSubject = courseSubjectServices.findAll();
         List<Test> listTest = testServices.findAll();
         List<Courses> listCourse = coursesServices.findAllCourses();
         request.setAttribute("listTest", listTest);

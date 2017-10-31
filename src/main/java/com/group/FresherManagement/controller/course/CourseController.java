@@ -14,6 +14,13 @@ import java.util.List;
 @WebServlet(name = "courses", urlPatterns = "/courses")
 public class CourseController extends HttpServlet {
 
+    private CoursesServices coursesServices;
+
+    @Override
+    public void init() throws ServletException {
+        coursesServices = new CoursesServices();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -25,7 +32,6 @@ public class CourseController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CoursesServices coursesServices = new CoursesServices();
         List<Courses> coursesList = coursesServices.findAllCourses();
         req.setAttribute("coursesList", coursesList);
         req.getRequestDispatcher("course-page.jsp").forward(req, resp);

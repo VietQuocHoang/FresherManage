@@ -44,4 +44,8 @@
         position: relative;
         z-index: 10000 !important;
     }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+        border-top: solid black 2px;
+        border-radius: 2px;
+    }
 </style>

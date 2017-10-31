@@ -14,7 +14,15 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "DeleteFresherController", urlPatterns = "/DeleteFresher")
 public class DeleteFresherController extends HttpServlet {
+    private FresherServices fresherServices;
+    private TestServices testServices;
     private static final String FRESHER_CONTROLLER = "FresherController";
+
+    @Override
+    public void init() throws ServletException {
+        fresherServices = new FresherServices();
+        testServices = new TestServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -25,8 +33,6 @@ public class DeleteFresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FresherServices fresherServices = new FresherServices();
-        TestServices testServices = new TestServices();
         try {
             int fresherId = Integer.parseInt(request.getParameter("txtId"));
             testServices.deleteAllTestFresherOfFresher(fresherId);

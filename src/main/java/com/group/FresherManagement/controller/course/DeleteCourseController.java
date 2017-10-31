@@ -12,10 +12,23 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "DeleteCourse", urlPatterns = "/DeleteCourse")
 public class DeleteCourseController extends HttpServlet {
+    private CoursesServices coursesServices;
+
+    @Override
+    public void init() throws ServletException {
+        coursesServices = new CoursesServices();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("txtId"));
-        CoursesServices coursesServices = new CoursesServices();
+        int id = -1;
+        try {
+            id = Integer.parseInt(req.getParameter("txtId"));
+        } catch (NumberFormatException e){
+            PrintWriter out = resp.getWriter();
+            out.println("Invalid request");
+            out.close();
+        }
         coursesServices.deleteCourses(id);
         resp.sendRedirect("courses");
     }

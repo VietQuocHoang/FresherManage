@@ -9,7 +9,7 @@ public class Test implements Serializable {
     private int id;
     private String name;
     private String questions;
-    private Courses_Subject coursesSubject;
+    private CoursesSubject coursesSubject;
 
     public Test() {
     }
@@ -45,11 +45,11 @@ public class Test implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
-    public Courses_Subject getCoursesSubject() {
+    public CoursesSubject getCoursesSubject() {
         return coursesSubject;
     }
 
-    public void setCoursesSubject(Courses_Subject coursesSubject) {
+    public void setCoursesSubject(CoursesSubject coursesSubject) {
         this.coursesSubject = coursesSubject;
     }
 }

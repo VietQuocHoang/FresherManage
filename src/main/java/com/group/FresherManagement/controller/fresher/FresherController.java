@@ -14,7 +14,13 @@ import java.util.List;
 
 @WebServlet(name = "FresherController", urlPatterns = "/FresherController")
 public class FresherController extends HttpServlet {
+    private FresherServices fresherServices;
     private static final String FRESHER_PAGE = "fresher-page.jsp";
+
+    @Override
+    public void init() throws ServletException {
+        fresherServices = new FresherServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -25,7 +31,6 @@ public class FresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FresherServices fresherServices = new FresherServices();
         List<Fresher> listFresher = fresherServices.findAll();
         request.setAttribute("listFresher", listFresher);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(FRESHER_PAGE);

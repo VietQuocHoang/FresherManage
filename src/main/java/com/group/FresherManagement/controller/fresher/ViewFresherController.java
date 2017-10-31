@@ -13,8 +13,14 @@ import java.io.IOException;
 
 @WebServlet(name = "ViewFresherController", urlPatterns = "/viewFresher")
 public class ViewFresherController extends HttpServlet {
+    private FresherServices fresherServices;
     private static final String FRESHER_CONTROLLER = "FresherController";
     private static final String FRESHER_DETAIL = "fresher-detail.jsp";
+
+    @Override
+    public void init() throws ServletException {
+        fresherServices = new FresherServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,7 +32,6 @@ public class ViewFresherController extends HttpServlet {
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int fresherId = Integer.parseInt(request.getParameter("id"));
-        FresherServices fresherServices = new FresherServices();
         Fresher fresher = fresherServices.findById(fresherId);
         if (fresher == null) {
             response.sendRedirect(FRESHER_CONTROLLER);

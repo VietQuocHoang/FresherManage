@@ -1,8 +1,9 @@
 package com.group.FresherManagement.controller.test;
 
-import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.entities.Test;
 import com.group.FresherManagement.services.CourseSubjectServices;
+import com.group.FresherManagement.services.FresherServices;
 import com.group.FresherManagement.services.TestFresherServices;
 import com.group.FresherManagement.services.TestServices;
 
@@ -19,6 +20,13 @@ import java.util.logging.Logger;
 public class SaveTestController extends HttpServlet {
     private static final String TEST_CONTROLLER = "TestController";
 
+    private TestServices testServices;
+
+    @Override
+    public void init() throws ServletException {
+        testServices = new TestServices();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
@@ -29,8 +37,6 @@ public class SaveTestController extends HttpServlet {
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        TestServices testServices = new TestServices();
-        TestFresherServices testFresherServices = new TestFresherServices();
         CourseSubjectServices courseSubjectServices = new CourseSubjectServices();
         String testName = request.getParameter("txtTestName");
         String question = request.getParameter("txtQuestion");
@@ -39,7 +45,7 @@ public class SaveTestController extends HttpServlet {
         try {
             int course_subject_id = Integer.parseInt(courseSubjectId);
             int state = Integer.parseInt(btnAction);
-            Courses_Subject courses_subject = courseSubjectServices.findById(course_subject_id);
+            CoursesSubject courses_subject = courseSubjectServices.findById(course_subject_id);
             if (courses_subject != null) {
                 Test test = new Test();
                 if (state == 2) {

@@ -1,11 +1,14 @@
-import com.group.FresherManagement.dao.CourseDAO;
-import com.group.FresherManagement.entities.Courses;
+import com.group.FresherManagement.dao.UserDAO;
+import com.group.FresherManagement.entities.User;
 
 public class Main {
 
     public static void main(String[] args) {
-        CourseDAO courseDAO = new CourseDAO(Courses.class);
-        courseDAO.findAll();
+        UserDAO userDAO = new UserDAO(User.class);
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("admin");
+        userDAO.insert(user);
         return;
     }
 }

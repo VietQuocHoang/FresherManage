@@ -15,12 +15,12 @@ public class CoursesServices {
     private TestFresherDAO testFresherDAO;
 
     public CoursesServices() {
-        coursesSubjectDAO = new CoursesSubjectDAO(Courses_Subject.class);
+        coursesSubjectDAO = new CoursesSubjectDAO(CoursesSubject.class);
         courseDAO = new CourseDAO(Courses.class);
         subjectDAO = new SubjectDAO(Subject.class);
         fresherDAO = new FresherDAO(Fresher.class);
-        coursesFresherDAO = new CoursesFresherDAO(Courses_Fresher.class);
-        testFresherDAO = new TestFresherDAO(Test_Fresher.class);
+        coursesFresherDAO = new CoursesFresherDAO(CoursesFresher.class);
+        testFresherDAO = new TestFresherDAO(TestFresher.class);
     }
 
     public List<Courses> findAllCourses() {
@@ -45,21 +45,21 @@ public class CoursesServices {
         return courseDAO.findById(id);
     }
 
-    public void addSubjectToCourse(Courses_Subject courses_subject) {
+    public void addSubjectToCourse(CoursesSubject courses_subject) {
         coursesSubjectDAO.insert(courses_subject);
     }
 
-    public void addFresherToCourse(Courses_Fresher courses_fresher) {
+    public void addFresherToCourse(CoursesFresher courses_fresher) {
         coursesFresherDAO.insert(courses_fresher);
     }
 
     public List<Subject> findSubjectNotIncludedInCourse(Courses courses) {
-        List<Courses_Subject> list = courses.getCoursesSubjectList();
+        List<CoursesSubject> list = courses.getCoursesSubjectList();
         if (list == null || list.isEmpty()) {
             return subjectDAO.findAll();
         } else {
             List<Integer> includedSubjectList = new ArrayList();
-            for (Courses_Subject c : list) {
+            for (CoursesSubject c : list) {
                 includedSubjectList.add(c.getSubject().getId());
             }
             List<Subject> notIncludedSubjectList = subjectDAO.findByNotSubjectId(includedSubjectList);
@@ -67,21 +67,21 @@ public class CoursesServices {
         }
     }
 
-    public void removeSubjectFromCourses(Courses_Subject coursesSubject) {
+    public void removeSubjectFromCourses(CoursesSubject coursesSubject) {
         coursesSubjectDAO.delete(coursesSubject.getId());
     }
 
-    public void removeFresherFromCourses(Courses_Fresher courses_fresher) {
+    public void removeFresherFromCourses(CoursesFresher courses_fresher) {
         coursesFresherDAO.delete(courses_fresher.getId());
     }
 
     public List<Fresher> findFresherNotIncludedInCourse(Courses courses) {
-        List<Courses_Fresher> list = courses.getCoursesFresherList();
+        List<CoursesFresher> list = courses.getCoursesFresherList();
         if (list == null || list.isEmpty()) {
             return fresherDAO.findAll();
         } else {
             List<Integer> includedFresherList = new ArrayList();
-            for (Courses_Fresher c : list) {
+            for (CoursesFresher c : list) {
                 includedFresherList.add(c.getFresher().getId());
             }
             List<Fresher> notIncludedFresherList = fresherDAO.findByNotFresherId(includedFresherList);
@@ -93,7 +93,7 @@ public class CoursesServices {
         return subjectDAO.findById(id);
     }
 
-    public Courses_Subject findCourseSubjectById(int id) {
+    public CoursesSubject findCourseSubjectById(int id) {
         return coursesSubjectDAO.findById(id);
     }
 }

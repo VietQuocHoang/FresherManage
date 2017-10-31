@@ -15,12 +15,12 @@ public class TestServices {
     private CoursesFresherDAO coursesFresherDAO;
 
     public TestServices() {
-        this.coursesSubjectDAO = new CoursesSubjectDAO(Courses_Subject.class);
+        this.coursesSubjectDAO = new CoursesSubjectDAO(CoursesSubject.class);
         this.testDAO = new TestDAO(Test.class);
-        this.testFresherDAO = new TestFresherDAO(Test_Fresher.class);
+        this.testFresherDAO = new TestFresherDAO(TestFresher.class);
         this.courseDAO = new CourseDAO(Courses.class);
-        this.testFresherDAO = new TestFresherDAO(Test_Fresher.class);
-        this.coursesFresherDAO = new CoursesFresherDAO(Courses_Fresher.class);
+        this.testFresherDAO = new TestFresherDAO(TestFresher.class);
+        this.coursesFresherDAO = new CoursesFresherDAO(CoursesFresher.class);
     }
 
     public List<Test> findAll() {
@@ -44,13 +44,13 @@ public class TestServices {
     }
 
     public Courses findCourseOfTest(Test test) {
-        Courses_Subject courses_subject = test.getCoursesSubject();
+        CoursesSubject courses_subject = test.getCoursesSubject();
         int id = courses_subject.getCourses().getId();
         return courseDAO.findById(id);
     }
 
 
-    public void saveTestFresher(Test_Fresher test_fresher, int state) {
+    public void saveTestFresher(TestFresher test_fresher, int state) {
         if (state == 1) {
             testFresherDAO.insert(test_fresher);
         } else if (state == 2) {
@@ -60,7 +60,7 @@ public class TestServices {
         }
     }
 
-    public List<Test_Fresher> findAllTestFresher() {
+    public List<TestFresher> findAllTestFresher() {
         return testFresherDAO.findAll();
     }
 
@@ -69,15 +69,15 @@ public class TestServices {
     }
 
 
-    public Test_Fresher findTestFresherById(int id) {
+    public TestFresher findTestFresherById(int id) {
         return testFresherDAO.findById(id);
     }
 
     public void createTestFresher(Test test, int state) {
         Courses courses = findCourseOfTest(test);
-        List<Courses_Fresher> list = coursesFresherDAO.findAllByCourse(courses);
-        for (Courses_Fresher courseFresher : list) {
-            Test_Fresher test_fresher = new Test_Fresher();
+        List<CoursesFresher> list = coursesFresherDAO.findAllByCourse(courses);
+        for (CoursesFresher courseFresher : list) {
+            TestFresher test_fresher = new TestFresher();
             test_fresher.setTest(test);
             test_fresher.setFresher(courseFresher.getFresher());
             if (state == 1) {
@@ -87,10 +87,10 @@ public class TestServices {
         }
     }
 
-    public List<Test_Fresher> findAllTestFresherOfTestNotMark(Test test) {
-        List<Test_Fresher> list = new ArrayList<Test_Fresher>();
-        List<Test_Fresher> currList = findAllTestFresher();
-        for (Test_Fresher testFresher : currList) {
+    public List<TestFresher> findAllTestFresherOfTestNotMark(Test test) {
+        List<TestFresher> list = new ArrayList<TestFresher>();
+        List<TestFresher> currList = findAllTestFresher();
+        for (TestFresher testFresher : currList) {
             if (testFresher.getTest().getId() == test.getId()) {
                 if (testFresher.getMark() == 11.00) {
                     list.add(testFresher);
@@ -100,10 +100,10 @@ public class TestServices {
         return list;
     }
 
-    public List<Test_Fresher> findAllTestFresherOfTestMarked(Test test) {
-        List<Test_Fresher> list = new ArrayList<Test_Fresher>();
-        List<Test_Fresher> currList = findAllTestFresher();
-        for (Test_Fresher testFresher : currList) {
+    public List<TestFresher> findAllTestFresherOfTestMarked(Test test) {
+        List<TestFresher> list = new ArrayList<TestFresher>();
+        List<TestFresher> currList = findAllTestFresher();
+        for (TestFresher testFresher : currList) {
             if (testFresher.getTest().getId() == test.getId()) {
                 if (testFresher.getMark() != 11.00) {
                     list.add(testFresher);
@@ -114,8 +114,8 @@ public class TestServices {
     }
 
     public void deleteAllTestFresherOfFresher(int fresherId) {
-        List<Test_Fresher> currList = findAllTestFresher();
-        for (Test_Fresher test_fresher : currList) {
+        List<TestFresher> currList = findAllTestFresher();
+        for (TestFresher test_fresher : currList) {
             if (test_fresher.getFresher().getId() == fresherId) {
                 deleteTestFresher(test_fresher.getId());
             }
@@ -123,8 +123,8 @@ public class TestServices {
     }
 
     public void deleteAllTestFresherOfTest(int testId) {
-        List<Test_Fresher> list = findAllTestFresher();
-        for (Test_Fresher testFresher : list) {
+        List<TestFresher> list = findAllTestFresher();
+        for (TestFresher testFresher : list) {
             if (testFresher.getTest().getId() == testId) {
                 deleteTestFresher(testFresher.getId());
             }

@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "courses_subject")
-public class Courses_Subject implements Serializable {
+public class CoursesSubject implements Serializable {
     private int id;
     private Courses courses;
     private Subject subject;
 
-    public Courses_Subject() {
+    public CoursesSubject() {
     }
 
     @Id

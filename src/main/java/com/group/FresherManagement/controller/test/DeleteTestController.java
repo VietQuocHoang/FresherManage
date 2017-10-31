@@ -13,7 +13,13 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "DeleteTestController", urlPatterns = "/DeleteTest")
 public class DeleteTestController extends HttpServlet {
+    private TestServices testServices;
     private static final String TEST_CONTROLLER = "TestController";
+
+    @Override
+    public void init() throws ServletException {
+        testServices = new TestServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -24,7 +30,6 @@ public class DeleteTestController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestServices testServices = new TestServices();
         try {
             int testId = Integer.parseInt(request.getParameter("txtId"));
             testServices.deleteAllTestFresherOfTest(testId);

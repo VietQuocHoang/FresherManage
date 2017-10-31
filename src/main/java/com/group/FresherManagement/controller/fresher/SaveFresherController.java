@@ -18,7 +18,13 @@ import java.util.logging.Logger;
 
 @WebServlet(name = "SaveFresherController", urlPatterns = "/SaveFresher")
 public class SaveFresherController extends HttpServlet {
+    private FresherServices fresherServices;
     private static String FRESHER_CONTROLLER = "FresherController";
+
+    @Override
+    public void init() throws ServletException {
+        fresherServices = new FresherServices();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
@@ -30,7 +36,6 @@ public class SaveFresherController extends HttpServlet {
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        FresherServices fresherServices = new FresherServices();
         String firstName = request.getParameter("txtFirstName");
         String lastName = request.getParameter("txtLastName");
         String email = request.getParameter("txtEmail");

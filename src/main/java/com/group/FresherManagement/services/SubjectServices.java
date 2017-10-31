@@ -2,7 +2,7 @@ package com.group.FresherManagement.services;
 
 import com.group.FresherManagement.dao.CoursesSubjectDAO;
 import com.group.FresherManagement.dao.SubjectDAO;
-import com.group.FresherManagement.entities.Courses_Subject;
+import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.entities.Subject;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class SubjectServices {
 
 
     public SubjectServices() {
-        coursesSubjectDAO = new CoursesSubjectDAO(Courses_Subject.class);
+        coursesSubjectDAO = new CoursesSubjectDAO(CoursesSubject.class);
         subjectDAO = new SubjectDAO(Subject.class);
     }
 
@@ -39,7 +39,7 @@ public class SubjectServices {
         subjectDAO.delete(id);
     }
 
-    public List<Courses_Subject> getEquivalentCourses(Subject subject) {
+    public List<CoursesSubject> getEquivalentCourses(Subject subject) {
         return coursesSubjectDAO.findBySubjectId(subject);
     }
 

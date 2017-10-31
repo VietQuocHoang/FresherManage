@@ -17,8 +17,8 @@ public class Courses implements Serializable {
     private boolean isAvailable;
     private Date startDate;
     private Date endDate;
-    private List<Courses_Subject> coursesSubjectList;
-    private List<Courses_Fresher> coursesFresherList;
+    private List<CoursesSubject> coursesSubjectList;
+    private List<CoursesFresher> coursesFresherList;
 
     public Courses() {
     }
@@ -81,21 +81,21 @@ public class Courses implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "courses", orphanRemoval = true)
-    public List<Courses_Subject> getCoursesSubjectList() {
+    public List<CoursesSubject> getCoursesSubjectList() {
         return coursesSubjectList;
     }
 
-    public void setCoursesSubjectList(List<Courses_Subject> coursesSubjectList) {
+    public void setCoursesSubjectList(List<CoursesSubject> coursesSubjectList) {
         this.coursesSubjectList = coursesSubjectList;
     }
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "courses", orphanRemoval = true)
-    public List<Courses_Fresher> getCoursesFresherList() {
+    public List<CoursesFresher> getCoursesFresherList() {
         return coursesFresherList;
     }
 
-    public void setCoursesFresherList(List<Courses_Fresher> coursesFresherList) {
+    public void setCoursesFresherList(List<CoursesFresher> coursesFresherList) {
         this.coursesFresherList = coursesFresherList;
     }
 }
