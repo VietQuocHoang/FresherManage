@@ -16,6 +16,11 @@ public class SaveSubjectController extends HttpServlet {
     private SubjectServices subjectServices;
 
     @Override
+    public void init() throws ServletException {
+        subjectServices = new SubjectServices();
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         out.println("Invalid request");

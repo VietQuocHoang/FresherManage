@@ -22,13 +22,12 @@ public class MarkController extends HttpServlet {
         testServices = new TestServices();
     }
 
-    //    private static final String
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processServlet(request, response);
+        System.out.println("Method doGet doesn't support");
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

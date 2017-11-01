@@ -31,7 +31,7 @@ public class SaveFresherController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("Method doGet doesn't support");
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

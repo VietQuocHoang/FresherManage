@@ -17,21 +17,24 @@ public class TestFresherController extends HttpServlet {
     private static final String TEST_FRESHER_DETAIL = "test-fresher-detail.jsp";
 
     private TestServices testServices;
-    //    private static final String
+
+    @Override
+    public void init() throws ServletException {
+        testServices = new TestServices();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processServlet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processServlet(request, response);
+        System.out.println("Method doGet doesn't support");
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int testFresherId = Integer.parseInt(request.getParameter("txtTestFresherId"));
-//            int state = Integer.parseInt(request.getParameter("btnAction"));
             TestFresher test_fresher = testServices.findTestFresherById(testFresherId);
-//            testServices.saveTestFresher(test_fresher, state);
             request.setAttribute("test_fresher", test_fresher);
             request.getRequestDispatcher(TEST_FRESHER_DETAIL).forward(request, response);
         } catch (NumberFormatException ex) {

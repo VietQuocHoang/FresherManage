@@ -145,9 +145,9 @@
                                     <c:forEach var="course" items="${listCourse}">
                                         <%--<c:set var="course" value="${list.courses}"/>--%>
                                         <optgroup label="${course.courseName}">
-                                            <c:forEach var="listSubject" items="${course.coursesSubjectList}">
-                                                <c:set var="subject" value="${listSubject.subject}"/>
-                                                <option name="optCourseSubject" value="${listSubject.id}">${subject.acronym}</option>
+                                            <c:forEach var="courseSubject" items="${course.coursesSubjectList}">
+                                                <c:set var="subject" value="${courseSubject.subject}"/>
+                                                <option name="optCourseSubject" value="${courseSubject.id}">${subject.acronym}</option>
                                             </c:forEach>
                                         </optgroup>
                                     </c:forEach>

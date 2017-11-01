@@ -16,6 +16,14 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(name = "SaveCourse", urlPatterns = "/SaveCourse")
 public class SaveCourseController extends HttpServlet {
+    CoursesServices coursesServices;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        coursesServices = new CoursesServices();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
@@ -28,10 +36,10 @@ public class SaveCourseController extends HttpServlet {
         int state = -1;
         try {
             state = Integer.parseInt(req.getParameter("btnAction"));
-        } catch(NumberFormatException e){
-          PrintWriter out = resp.getWriter();
-          out.println("Invalid request");
-          out.close();
+        } catch (NumberFormatException e) {
+            PrintWriter out = resp.getWriter();
+            out.println("Invalid request");
+            out.close();
         }
         String courseName = req.getParameter("txtCourseName");
         String courseDescription = req.getParameter("txtCourseDescription");
@@ -57,7 +65,7 @@ public class SaveCourseController extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("txtId"));
             courses.setId(id);
         }
-        CoursesServices coursesServices = new CoursesServices();
+
         coursesServices.saveCourse(courses, state);
         if (state == 1) {
             resp.sendRedirect("courses");

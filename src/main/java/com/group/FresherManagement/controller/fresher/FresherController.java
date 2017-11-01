@@ -23,7 +23,7 @@ public class FresherController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processServlet(request, response);
+        System.out.println("Method doPost doesn't support");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

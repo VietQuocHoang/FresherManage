@@ -3,8 +3,6 @@ package com.group.FresherManagement.controller.test;
 import com.group.FresherManagement.entities.CoursesSubject;
 import com.group.FresherManagement.entities.Test;
 import com.group.FresherManagement.services.CourseSubjectServices;
-import com.group.FresherManagement.services.FresherServices;
-import com.group.FresherManagement.services.TestFresherServices;
 import com.group.FresherManagement.services.TestServices;
 
 import javax.servlet.ServletException;
@@ -21,10 +19,12 @@ public class SaveTestController extends HttpServlet {
     private static final String TEST_CONTROLLER = "TestController";
 
     private TestServices testServices;
+    private CourseSubjectServices courseSubjectServices;
 
     @Override
     public void init() throws ServletException {
         testServices = new TestServices();
+        courseSubjectServices = new CourseSubjectServices();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,12 +32,11 @@ public class SaveTestController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("Method doGet doesn't support");
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        CourseSubjectServices courseSubjectServices = new CourseSubjectServices();
         String testName = request.getParameter("txtTestName");
         String question = request.getParameter("txtQuestion");
         String courseSubjectId = request.getParameter("selectCourseSubject");

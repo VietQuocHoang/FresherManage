@@ -19,4 +19,14 @@ public class CourseSubjectServices {
     public CoursesSubject findById(int id) {
         return coursesSubjectDAO.findById(id);
     }
+
+//    public List<CoursesSubject> findAllCourseSubjectOfCourse(Courses courses){
+//        List<CoursesSubject> listCourseSubject = findAll();
+//        List<CoursesSubject> currList = new ArrayList<CoursesSubject>();
+//        for (CoursesSubject coursesSubject: listCourseSubject) {
+//            if(coursesSubject.getCourses().getId() == courses.getId()){
+//                currList.add(coursesSubject);
+//            }
+//        }
+//    }
 }

@@ -27,7 +27,7 @@ public class ViewSubjectController extends HttpServlet {
         int id = -1;
         try {
             id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             PrintWriter out = resp.getWriter();
             out.println("Invalid request");
             out.close();

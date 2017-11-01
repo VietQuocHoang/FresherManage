@@ -1,9 +1,7 @@
 package com.group.FresherManagement.controller.test;
 
-import com.group.FresherManagement.entities.Courses;
-import com.group.FresherManagement.entities.Fresher;
-import com.group.FresherManagement.entities.Test;
-import com.group.FresherManagement.entities.TestFresher;
+import com.group.FresherManagement.entities.*;
+import com.group.FresherManagement.services.CourseSubjectServices;
 import com.group.FresherManagement.services.CoursesServices;
 import com.group.FresherManagement.services.TestServices;
 
@@ -23,15 +21,17 @@ public class ViewTestController extends HttpServlet {
     private static final String TEST_DETAIL = "test-detail.jsp";
     private TestServices testServices;
     private CoursesServices coursesServices;
+    private CourseSubjectServices courseSubjectServices;
 
     @Override
     public void init() throws ServletException {
         testServices = new TestServices();
         coursesServices = new CoursesServices();
+        courseSubjectServices = new CourseSubjectServices();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("Method doPost doesn't support");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,8 +48,10 @@ public class ViewTestController extends HttpServlet {
             List<Fresher> notIncludedFresherList = coursesServices.findFresherNotIncludedInCourse(courses);
             List<TestFresher> listTestFresherNotMark = testServices.findAllTestFresherOfTestNotMark(test);
             List<TestFresher> listTestFresherMarked = testServices.findAllTestFresherOfTestMarked(test);
+            List<CoursesSubject> listCoursesSubject = courseSubjectServices.findAll();
             request.setAttribute("testObj", test);
             request.setAttribute("listCourse", listCourse);
+            request.setAttribute("listCourseSubject", listCoursesSubject);
 //            request.setAttribute("course", courses);
             request.setAttribute("listTestFresherNotMark", listTestFresherNotMark);
             request.setAttribute("listTestFresherMarked", listTestFresherMarked);

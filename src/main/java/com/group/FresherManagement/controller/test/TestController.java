@@ -23,6 +23,7 @@ public class TestController extends HttpServlet {
     private TestServices testServices;
     private CourseSubjectServices courseSubjectServices;
     private CoursesServices coursesServices;
+
     @Override
     public void init() throws ServletException {
         testServices = new TestServices();
@@ -31,7 +32,7 @@ public class TestController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processServlet(request, response);
+        System.out.println("Method doPost doesn't support");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

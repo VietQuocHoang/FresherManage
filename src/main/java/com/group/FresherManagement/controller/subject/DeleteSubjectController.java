@@ -22,9 +22,9 @@ public class DeleteSubjectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = -1;
-        try{
+        try {
             id = Integer.parseInt(req.getParameter("txtId"));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             PrintWriter out = resp.getWriter();
             out.print("Invalid request");
             out.close();

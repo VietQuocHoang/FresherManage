@@ -69,21 +69,20 @@
                                         tabindex="5">
                                     <c:forEach var="course" items="${listCourse}">
                                         <%--<c:set var="course" value="${list.courses}"/>--%>
-                                        <optgroup label="${course.courseName}">
-                                            <c:forEach var="listSubject" items="${course.coursesSubjectList}">
-                                                <c:set var="subject" value="${listSubject.subject}"/>
-                                                <option name="optCourseSubject"
-                                                        value="${subject.id}">${subject.acronym}</option>
-                                            </c:forEach>
-                                        </optgroup>
+                                    <optgroup label="${course.courseName}">
+                                        <c:forEach var="courseSubject" items="${course.coursesSubjectList}">
+                                            <c:set var="subject" value="${courseSubject.subject}"/>
+                                            <option name="optCourseSubject"
+                                                    value="${courseSubject.id}">${subject.acronym}</option>
+                                        </c:forEach>
+                                    </optgroup>
                                     </c:forEach>
-                                </select>
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#selectCourseSubject").chosen({width: "100%"});
-                                        $("#selectCourseSubject").val("${testObj.coursesSubject.subject.id}").trigger("chosen:updated");
-                                    })
-                                </script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#selectCourseSubject").chosen({width: "100%"});
+                                            $("#selectCourseSubject").val("${testObj.coursesSubject.id}").trigger("chosen:updated");
+                                        })
+                                    </script>
                             </div>
                         </div>
                     </div>
@@ -96,104 +95,98 @@
                         </div>
                     </div>
                 </form>
-                <%--<script>--%>
-                <%--$(document).ready(function () {--%>
-                <%--$("#txtDob").datepicker({--%>
-                <%--dateFormat: "dd/mm/yy"--%>
-                <%--});--%>
-                <%--});--%>
-                <%--</script>--%>
             </div>
 
         </div>
-        <div class="row">
-            <ul class="nav nav-tabs">
-                <%--<li class=""><a data-toggle="tab" href="#tab-subject">Subject</a></li>--%>
-                <li class="active"><a data-toggle="tab" href="#tab-fresher">Fresher</a></li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab-fresher" class="tab-pane fade in active">
-                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                        <h3><b>${testObj.name}</b> done: </h3>
-                        <c:if test="${not empty listTestFresherMarked}">
-                            <table class="table table-bordered" id="table-included-fresher">
-                                <thead>
+
+    </div>
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <%--<li class=""><a data-toggle="tab" href="#tab-subject">Subject</a></li>--%>
+            <li class="active"><a data-toggle="tab" href="#tab-fresher">Fresher</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-fresher" class="tab-pane fade in active">
+                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                    <h3><b>${testObj.name}</b> done: </h3>
+                    <c:if test="${not empty listTestFresherMarked}">
+                        <table class="table table-bordered" id="table-included-fresher">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fresher:</th>
+                                <th>Test:</th>
+                                <th>Mark:</th>
+                                <th>Marked Date:</th>
+                                <th>Action:</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${listTestFresherMarked}" var="test_fresher" varStatus="status">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Fresher:</th>
-                                    <th>Test:</th>
-                                    <th>Mark:</th>
-                                    <th>Marked Date:</th>
-                                    <th>Action:</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${listTestFresherMarked}" var="test_fresher" varStatus="status">
-                                    <tr>
-                                        <td>${status.count}</td>
-                                        <td>${test_fresher.fresher.firstName} ${test_fresher.fresher.lastName}</td>
-                                        <td>${test_fresher.test.name}</td>
-                                        <td>${test_fresher.mark}</td>
-                                        <td>${test_fresher.markDate}</td>
-                                        <td>
-                                            <form method="post" action="TestFresherController">
-                                                <input type="hidden" value="${test_fresher.id}" name="txtTestFresherId"/>
-                                                <button type="submit" name="btnAction" value="2"
-                                                        class="btn btn-warning">
-                                                    Remark <i class="glyphicon glyphicon-pencil
+                                    <td>${status.count}</td>
+                                    <td>${test_fresher.fresher.firstName} ${test_fresher.fresher.lastName}</td>
+                                    <td>${test_fresher.test.name}</td>
+                                    <td>${test_fresher.mark}</td>
+                                    <td>${test_fresher.markDate}</td>
+                                    <td>
+                                        <form method="post" action="TestFresherController">
+                                            <input type="hidden" value="${test_fresher.id}" name="txtTestFresherId"/>
+                                            <button type="submit" name="btnAction" value="2"
+                                                    class="btn btn-warning">
+                                                Remark <i class="glyphicon glyphicon-pencil
 "></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <script>
+                            $(document).ready(function () {
+                                $("#table-included-fresher").DataTable();
+                            });
+                        </script>
+                    </c:if>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                    <h3>Not mark: </h3>
+                    <c:if test="${not empty listTestFresherNotMark}">
+                        <table class="table table-bordered" id="table-not-mark-test">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fresher:</th>
+                                <th>Test:</th>
+                                <th>Action:</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="test_fresher" items="${listTestFresherNotMark}" varStatus="status">
+                                <tr>
+                                    <td>${status.count}</td>
+                                    <td>${test_fresher.fresher.firstName} ${test_fresher.fresher.lastName}</td>
+                                    <td>${test_fresher.test.name}</td>
+                                    <td>
+                                        <form method="post" action="TestFresherController">
+                                            <input type="hidden" value="${test_fresher.id}" name="txtTestFresherId"/>
+                                            <button type="submit" name="btnAction" value="2"
+                                                    class="btn btn-success">
+                                                Mark <i class="glyphicon glyphicon-plus"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
                             <script>
                                 $(document).ready(function () {
-                                    $("#table-included-fresher").DataTable();
+                                    $("#table-not-mark-test").DataTable();
                                 });
                             </script>
-                        </c:if>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
-                        <h3>Not mark: </h3>
-                        <c:if test="${not empty listTestFresherNotMark}">
-                            <table class="table table-bordered" id="table-not-mark-test">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Fresher:</th>
-                                    <th>Test:</th>
-                                    <th>Action:</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="test_fresher" items="${listTestFresherNotMark}" varStatus="status">
-                                    <tr>
-                                        <td>${status.count}</td>
-                                        <td>${test_fresher.fresher.firstName} ${test_fresher.fresher.lastName}</td>
-                                        <td>${test_fresher.test.name}</td>
-                                        <td>
-                                            <form method="post" action="TestFresherController">
-                                                <input type="hidden" value="${test_fresher.id}" name="txtTestFresherId"/>
-                                                <button type="submit" name="btnAction" value="2"
-                                                        class="btn btn-success">
-                                                    Mark <i class="glyphicon glyphicon-plus"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#table-not-mark-test").DataTable();
-                                    });
-                                </script>
-                            </table>
-                        </c:if>
-                    </div>
+                        </table>
+                    </c:if>
                 </div>
             </div>
         </div>

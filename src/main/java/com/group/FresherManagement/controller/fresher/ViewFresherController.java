@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "ViewFresherController", urlPatterns = "/viewFresher")
 public class ViewFresherController extends HttpServlet {
@@ -23,7 +25,7 @@ public class ViewFresherController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("Method doPost doesn't support");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,14 +33,18 @@ public class ViewFresherController extends HttpServlet {
     }
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int fresherId = Integer.parseInt(request.getParameter("id"));
-        Fresher fresher = fresherServices.findById(fresherId);
-        if (fresher == null) {
-            response.sendRedirect(FRESHER_CONTROLLER);
-        } else {
-            request.setAttribute("fresher", fresher);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(FRESHER_DETAIL);
-            requestDispatcher.forward(request, response);
+        try {
+            int fresherId = Integer.parseInt(request.getParameter("id"));
+            Fresher fresher = fresherServices.findById(fresherId);
+            if (fresher == null) {
+                response.sendRedirect(FRESHER_CONTROLLER);
+            } else {
+                request.setAttribute("fresher", fresher);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher(FRESHER_DETAIL);
+                requestDispatcher.forward(request, response);
+            }
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(ViewFresherController.class.getName()).log(Level.SEVERE, "Exception at ViewFresherController " + ex);
         }
     }
 }

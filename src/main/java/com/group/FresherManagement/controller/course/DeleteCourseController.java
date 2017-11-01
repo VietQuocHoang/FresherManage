@@ -24,7 +24,7 @@ public class DeleteCourseController extends HttpServlet {
         int id = -1;
         try {
             id = Integer.parseInt(req.getParameter("txtId"));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             PrintWriter out = resp.getWriter();
             out.println("Invalid request");
             out.close();
